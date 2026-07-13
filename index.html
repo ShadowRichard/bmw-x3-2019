@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BMW X3 xDrive30i 2019 — 76.000 km · Bogotá</title>
 <meta name="description" content="BMW X3 xDrive30i modelo 2019, 76.000 km. Motor TwinPower Turbo de 252 hp, tracción integral xDrive, techo panorámico e interior en cuero. Agenda tu visita en Bogotá.">
-<link rel="preload" as="image" href="img/hero.jpg">
+<link rel="preload" as="image" href="img/hero.jpg" media="(min-width: 761px)">
+<link rel="preload" as="image" href="img/n-front34-mobile.jpg" media="(max-width: 760px)">
 <style>
   :root {
     --bg: #0a0b0e;
@@ -17,6 +18,7 @@
     --line: rgba(255,255,255,.09);
     --line-strong: rgba(255,255,255,.18);
     --accent: #2ea8e0;
+    --eco: #3db6ed;
     --bg-light: #f7f6f3;
     --ink-light: #121316;
     --soft-light: #45484e;
@@ -147,21 +149,30 @@
   /* ---------- Hero ---------- */
   .hero {
     position: relative;
-    height: 100svh;
-    min-height: 560px;
+    margin: var(--pad) var(--pad) 0;
+    height: calc(100svh - (2 * var(--pad)));
+    min-height: 480px;
+    border-radius: 22px;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
     color: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 40px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);
   }
   .hero-media {
     position: absolute;
     inset: 0;
-    background: url("img/hero.jpg") center 62% / cover no-repeat;
-    animation: heroZoom 16s cubic-bezier(.2,.5,.3,1) forwards;
+    background-position: 62% 48%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: heroZoom 18s cubic-bezier(.2,.5,.3,1) forwards;
+  }
+  @media (min-width: 761px) {
+    .hero-media { background-image: url("img/hero.jpg"); }
   }
   @keyframes heroZoom {
-    from { transform: scale(1.14); }
+    from { transform: scale(1.1); }
     to   { transform: scale(1.0); }
   }
   .hero::after {
@@ -169,15 +180,20 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to top, var(--bg) 0%, rgba(10,11,14,.55) 26%, rgba(10,11,14,.05) 55%, rgba(10,11,14,.42) 100%);
+      linear-gradient(100deg, rgba(6,7,10,.6) 0%, rgba(6,7,10,.34) 30%, rgba(6,7,10,.06) 52%, rgba(6,7,10,0) 66%),
+      linear-gradient(to top, rgba(6,7,10,.66) 0%, rgba(6,7,10,.2) 24%, rgba(6,7,10,0) 46%);
   }
   .hero-content {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 0 var(--pad) clamp(2.5rem, 7vh, 5rem);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(4.5rem, 10vh, 6rem) var(--pad) clamp(1.6rem, 4vh, 2.4rem);
     will-change: transform, opacity;
   }
+  .hero-title { margin: 0 0 auto; padding-left: clamp(0rem, 3vw, 2.5rem); }
   .hero-content > * {
     opacity: 0;
     transform: translateY(28px);
@@ -191,36 +207,102 @@
   @keyframes heroRise {
     to { opacity: 1; transform: none; }
   }
-  .hero-content .eyebrow { color: rgba(255,255,255,.78); margin-bottom: 1rem; }
   .hero-content h1 {
-    font-size: clamp(2.8rem, 9vw, 6.5rem);
-    letter-spacing: -.025em;
+    font-size: clamp(3.4rem, 11vw, 8rem);
+    line-height: .96;
+    letter-spacing: -.02em;
+    text-shadow: 0 2px 28px rgba(0,0,0,.55), 0 1px 4px rgba(0,0,0,.4);
+  }
+  .hero-content h1 .h1-sub {
+    display: block;
+    font-size: .56em;
+    font-weight: 300;
+    letter-spacing: .01em;
+    color: rgba(255,255,255,.95);
+    margin-top: .08em;
   }
   .hero-content .sub {
-    margin-top: .5rem;
-    font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+    margin-top: 1.1rem;
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
     font-weight: 300;
     letter-spacing: .02em;
-    color: rgba(255,255,255,.9);
+    color: rgba(255,255,255,.92);
+    text-shadow: 0 1px 14px rgba(0,0,0,.6);
   }
-  .hero-specs {
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.8rem; }
+
+  /* ---------- Hero bottom bar (specs + miniatura) ---------- */
+  .hero-bottombar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.6rem 2.6rem;
-    margin-top: 1.9rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,.28);
-    max-width: 720px;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
   }
-  .hero-specs .spec .v { font-size: 1.28rem; font-weight: 700; }
-  .hero-specs .spec .k {
-    font-size: .7rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.6);
-    margin-top: .1rem;
+  .hero-statcard {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem 2rem;
+    padding: clamp(1.2rem, 3vw, 1.9rem) clamp(1.2rem, 3vw, 2.5rem);
+    background: rgba(190,196,206,.22);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 12px;
+    text-align: center;
   }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+  .hero-statcard .v {
+    font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-statcard .v small { font-size: .5em; font-weight: 600; margin-left: .08em; }
+  .hero-statcard .k {
+    font-size: clamp(.78rem, 1.4vw, .95rem);
+    font-weight: 400;
+    color: rgba(255,255,255,.85);
+    margin-top: .45rem;
+  }
+  .hero-thumb {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(220px, 26vw, 330px);
+    aspect-ratio: 16 / 9.5;
+    border-radius: 12px;
+    overflow: hidden;
+    display: block;
+  }
+  .hero-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-thumb-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background .25s;
+  }
+  .hero-thumb-play::before {
+    content: "";
+    width: 58px; height: 58px;
+    border: 1.5px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    position: absolute;
+    transition: transform .3s;
+  }
+  .hero-thumb-play::after {
+    content: "";
+    width: 0; height: 0;
+    border-left: 13px solid #fff;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 4px;
+  }
+  .hero-thumb:hover .hero-thumb-play::before { transform: scale(1.12); }
+  @media (max-width: 860px) { .hero-thumb { display: none; } }
 
   /* ---------- Buttons ---------- */
   .btn {
@@ -261,29 +343,6 @@
   .btn-whatsapp { background: #1f9d55; color: #fff; }
   .btn-whatsapp:hover { background: #23b061; box-shadow: 0 12px 30px rgba(31,157,85,.3); }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 1.4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    width: 1px;
-    height: 44px;
-    background: rgba(255,255,255,.35);
-    overflow: hidden;
-  }
-  .scroll-hint::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: var(--accent);
-    animation: scrollHint 2s ease-in-out infinite;
-  }
-  @keyframes scrollHint { 0% { top: -50%; } 100% { top: 110%; } }
-
   /* ---------- Sections ---------- */
   section { padding: clamp(4rem, 10vw, 7.5rem) var(--pad); }
   .wrap { max-width: 1280px; margin: 0 auto; }
@@ -307,17 +366,139 @@
   .light .btn-ghost:hover { border-color: var(--ink-light); background: rgba(10,11,14,.06); }
   .contact.light { background: var(--bg-light); color: var(--ink-light); }
 
+  /* ---------- Cluster tablero (estilo BMW) ---------- */
+  .eco-cluster {
+    max-width: 1000px;
+    margin: clamp(2.5rem, 5vw, 3.6rem) auto 0;
+    background: linear-gradient(180deg, #0e1116, #0a0c10);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(1.4rem, 4vw, 2.6rem);
+    box-shadow: 0 40px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .cluster-top {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  }
+  .cluster-top .status {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--soft);
+  }
+  .cluster-top .status i {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--eco); box-shadow: 0 0 8px var(--eco); animation: ecoPulse 2s ease-in-out infinite;
+  }
+  @keyframes ecoPulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+  .cluster-cap { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: right; }
+
+  .cluster-main {
+    display: grid; gap: clamp(1.4rem, 3vw, 2rem); align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .cluster-main { grid-template-columns: 1fr auto 1fr; } }
+
+  .gauge-block { display: flex; flex-direction: column; align-items: center; gap: .9rem; }
+  .gauge { position: relative; width: 100%; max-width: 250px; aspect-ratio: 1; margin: 0 auto; }
+  .gauge-svg { width: 100%; height: 100%; overflow: visible; }
+  .g-track { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 6; stroke-linecap: round; }
+  .g-dots { fill: none; stroke: rgba(255,255,255,.14); stroke-width: 2.4; stroke-linecap: round; }
+  .g-val {
+    fill: none; stroke: var(--eco); stroke-width: 6; stroke-linecap: round;
+    filter: drop-shadow(0 0 5px rgba(61,182,237,.75));
+    transition: stroke-dasharray 1.1s cubic-bezier(.2,.6,.2,1), stroke .45s ease;
+  }
+  .gauge-center {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  }
+  .gauge-num { font-size: clamp(2rem, 5.5vw, 2.9rem); font-weight: 700; letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .gauge-unit { margin-top: .3rem; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .gauge-label { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--eco); }
+
+  .eco-bars { display: flex; gap: 1.3rem; justify-content: center; }
+  .bar-item { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+  .bar { position: relative; width: 20px; height: 120px; border-radius: 6px; background: rgba(255,255,255,.06); overflow: hidden; }
+  .bar span {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: var(--eco); box-shadow: 0 0 10px rgba(61,182,237,.6); border-radius: 6px;
+    transition: height .9s cubic-bezier(.2,.6,.2,1), background .45s ease;
+  }
+  .bar-k { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  .eco-chips {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem;
+    margin-top: clamp(1.6rem, 4vw, 2.4rem);
+  }
+  @media (max-width: 520px) { .eco-chips { grid-template-columns: 1fr; } }
+  .chip {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: .95rem 1.1rem; display: flex; flex-direction: column; gap: .2rem;
+    background: rgba(61,182,237,.06);
+  }
+  .chip b { font-size: 1.1rem; font-weight: 700; color: var(--eco); }
+  .chip span { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .eco-note {
+    margin: clamp(2rem, 4vw, 2.8rem) auto 0;
+    text-align: center; font-size: .85rem; color: var(--muted); max-width: 640px;
+  }
+
+  /* ---------- Modos de manejo (cluster interactivo estilo BMW) ---------- */
+  .modes {
+    --mcol: #3db6ed;
+    --mglow: rgba(61,182,237,.55);
+    background: var(--bg); color: var(--ink);
+  }
+  .modes .eco-lead { max-width: 760px; margin: 0 auto; text-align: center; }
+  .modes .eyebrow { justify-content: center; margin-bottom: 1.2rem; color: var(--muted); }
+  .modes h2 {
+    font-size: clamp(1.8rem, 4.4vw, 2.9rem);
+    line-height: 1.14;
+    letter-spacing: -.02em;
+  }
+  .modes h2 em { font-style: normal; color: var(--mcol); transition: color .45s ease; }
+  .modes .eco-lead p { margin-top: 1.2rem; color: var(--soft); font-size: clamp(1rem, 2.1vw, 1.12rem); }
+  .modes .g-val { stroke: var(--mcol); filter: drop-shadow(0 0 6px var(--mglow)); }
+  .modes .gauge-label { color: var(--mcol); transition: color .45s ease; }
+  .modes .bar span { background: var(--mcol); box-shadow: 0 0 10px var(--mglow); }
+  .modes .cluster-top .status i { background: var(--mcol); box-shadow: 0 0 8px var(--mcol); }
+  .mode-tabs {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem;
+    margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .mode-tab {
+    font-family: var(--font);
+    font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: .85rem 1.5rem;
+    min-height: 44px;
+    cursor: pointer;
+    transition: color .3s, border-color .3s, box-shadow .3s;
+  }
+  .mode-tab:hover { color: var(--ink); }
+  .mode-tab.active {
+    color: #fff;
+    border-color: var(--mcol);
+    box-shadow: 0 0 16px var(--mglow), inset 0 0 12px rgba(255,255,255,.05);
+  }
+  .mode-desc {
+    margin: clamp(1.4rem, 3vw, 2rem) auto 0;
+    text-align: center; color: var(--soft); font-size: .95rem; max-width: 60ch; line-height: 1.6;
+  }
+
   .statement { text-align: center; }
-  .statement .eyebrow { justify-content: center; margin-bottom: 1.2rem; }
   .statement h2 {
     font-size: clamp(1.7rem, 4.4vw, 3rem);
     font-weight: 600;
     line-height: 1.22;
   }
-  .statement h2 em { font-style: normal; color: var(--accent); }
 
   /* ---------- Stats ---------- */
   .stats {
+    position: relative;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     padding-top: clamp(2.5rem, 6vw, 4rem);
@@ -376,6 +557,7 @@
     aspect-ratio: 3 / 2;
     box-shadow: 0 24px 60px rgba(0,0,0,.45);
   }
+  .split-media.wide-crop { aspect-ratio: 2 / 1; }
   .split-media img {
     width: 100%;
     height: 116%;
@@ -485,7 +667,6 @@
   .g-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   @media (min-width: 760px) {
     .g-item.wide { grid-column: span 2; }
-    .g-item.tall { grid-row: span 2; aspect-ratio: auto; }
   }
 
   /* ---------- Lightbox ---------- */
@@ -613,17 +794,163 @@
   .mobile-cta.show { transform: none; }
   .mobile-cta .btn { flex: 1; padding: .8rem 1rem; font-size: .76rem; }
 
+  /* ---------- Hero móvil: tarjeta tipo panel (reemplaza el hero de escritorio en <=760px) ---------- */
+  .hero-card { display: none; }
+  @media (max-width: 760px) {
+    .hero { display: none; }
+    .site-header {
+      background: rgba(10,11,14,.88) !important;
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--line);
+      height: 60px !important;
+    }
+    .hero-card {
+      display: block;
+      margin: calc(60px + 1rem) var(--pad) 0;
+      padding: 2.1rem 1.3rem 1.6rem;
+      background: linear-gradient(180deg, #14171e, #0b0d12);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+      animation: cardRise .7s cubic-bezier(.2,.6,.2,1) both;
+    }
+    .hero-card-title {
+      display: block;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 13vw, 3.2rem);
+      letter-spacing: -.02em;
+      line-height: 1;
+      background: linear-gradient(180deg, #ffffff 0%, #c9ced5 40%, #6f757e 58%, #464c54 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-card-photo { margin: .6rem auto 0; max-width: 300px; }
+    .hero-card-photo img {
+      width: 100%; height: auto; display: block;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 50px rgba(0,0,0,.5);
+    }
+    .hero-card-name {
+      margin-top: .9rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: var(--ink);
+    }
+    .hero-card-sub {
+      margin-top: .25rem;
+      font-size: .76rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-card-rings {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .4rem;
+      margin-top: 1.7rem;
+    }
+    .ring-item { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+    .ring { position: relative; width: 100%; max-width: 62px; aspect-ratio: 1; margin: 0 auto; }
+    .ring svg { width: 100%; height: 100%; }
+    .ring-track { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 7; }
+    .ring-val {
+      fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round;
+      filter: drop-shadow(0 0 4px rgba(46,168,224,.55));
+      animation: ringFill 1.1s cubic-bezier(.2,.6,.2,1) .55s backwards;
+    }
+    .ring-icon {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink);
+    }
+    .ring-icon svg { width: 20px; height: 20px; }
+    .ring-label { font-size: .72rem; font-weight: 700; color: var(--soft); }
+    .hero-card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.7rem;
+      padding: 1rem 1.2rem;
+      background: #fff;
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      text-align: left;
+      transition: transform .2s ease;
+    }
+    .hero-card-cta:active { transform: scale(.98); }
+    .hero-card-cta .cta-label { font-weight: 700; font-size: .92rem; color: var(--ink-light); }
+    .hero-card-cta .cta-meta {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .74rem; color: var(--muted-light); white-space: nowrap;
+    }
+    .hero-card-cta .cta-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #3ecf6b; box-shadow: 0 0 0 3px rgba(62,207,107,.18);
+    }
+    .hero-card-links { margin-top: 1rem; }
+    .hero-card-links a {
+      display: inline-block;
+      padding: .6rem .4rem;
+      font-size: .8rem; font-weight: 600; color: var(--muted);
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+  }
+  @keyframes cardRise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes ringFill {
+    from { stroke-dasharray: 0 100; }
+  }
+
   /* ---------- Mobile refinements ---------- */
   @media (max-width: 760px) {
     .mobile-cta { display: flex; }
     footer { padding-bottom: 7.5rem; }
   }
   @media (max-width: 640px) {
-    .hero-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.1rem 1rem;
+    .hero { height: auto; min-height: calc(100svh - 2 * var(--pad)); }
+    .hero-content { height: auto; padding-top: 5.2rem; }
+    .hero-title { margin: 1.2rem 0 2rem; }
+    .hero-media { background-position: 66% 50%; }
+    .hero-statcard { padding: 1rem .8rem; gap: .6rem; }
+
+    /* Franja de ficha rápida: carrusel horizontal con snap, estilo BMW mobile */
+    .stats-grid {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(128px, 1fr);
+      gap: 0;
+      text-align: left;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
+    .stats-grid::-webkit-scrollbar { display: none; }
+    .stat {
+      scroll-snap-align: start;
+      padding-right: 1.5rem;
+      margin-right: 1.5rem;
+      border-right: 1px solid var(--line);
+    }
+    .stat:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+    .stats::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 32px;
+      background: linear-gradient(to right, transparent, var(--bg) 75%);
+      pointer-events: none;
+    }
+
     .spec-table th, .spec-table td { display: block; width: 100%; }
     .spec-table th { padding: .95rem .4rem 0; border-bottom: 0; }
     .spec-table td { padding: .1rem .4rem .95rem; }
@@ -653,7 +980,6 @@
   @media (max-width: 520px) {
     .hero-actions, .contact-actions { flex-direction: column; align-items: stretch; }
     .hero-actions .btn, .contact-actions .btn { width: 100%; }
-    .scroll-hint { display: none; }
   }
   @media (max-width: 340px) {
     .brand .model { display: none; }
@@ -662,6 +988,24 @@
   @media (hover: none) {
     .g-item .g-tag { opacity: 1; transform: none; }
     .g-item::after { opacity: .75; }
+  }
+
+  /* ---------- Hover fino (solo dispositivos con puntero) ---------- */
+  @media (hover: hover) and (pointer: fine) {
+    .brand { transition: opacity .25s; }
+    .brand:hover { opacity: .7; }
+
+    .split-media { transition: transform .45s cubic-bezier(.2,.6,.2,1); }
+    .split-media:hover { transform: scale(1.015); }
+
+    .stat { transition: transform .3s ease; cursor: default; }
+    .stat:hover { transform: translateY(-4px); }
+
+    .chip { transition: transform .25s ease, border-color .25s ease; }
+    .chip:hover { transform: translateY(-3px); border-color: var(--eco); }
+
+    .gauge-block { transition: transform .3s ease; }
+    .gauge-block:hover { transform: translateY(-3px); }
   }
 
   /* ---------- Reveal ---------- */
@@ -674,8 +1018,10 @@
   .reveal.in { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-media, .hero-content > *, .scroll-hint::after { animation: none !important; }
+    .hero-media, .hero-content > *, .hero-card { animation: none !important; }
+    .g-val, .bar span { transition: none; }
     .hero-content > * { opacity: 1; transform: none; }
+    .hero-card { opacity: 1; transform: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .split-media img { height: 100%; }
     html { scroll-behavior: auto; }
@@ -693,6 +1039,7 @@
   <nav class="nav-links" aria-label="Secciones">
     <a href="#diseno">Diseño</a>
     <a href="#interior">Interior</a>
+    <a href="#eco">Modos & Eficiencia</a>
     <a href="#especificaciones">Especificaciones</a>
     <a href="#galeria">Galería</a>
   </nav>
@@ -700,48 +1047,124 @@
 </header>
 
 <section class="hero" id="inicio" style="padding:0">
-  <div class="hero-media" id="heroMedia" role="img" aria-label="BMW X3 xDrive30i blanca, vista frontal tres cuartos en Bogotá"></div>
+  <div class="hero-media" role="img" aria-label="BMW X3 xDrive30i blanca de noche, sobre asfalto mojado en la ciudad"></div>
   <div class="hero-content" id="heroContent">
-    <p class="eyebrow">Modelo 2019 · 76.000 km · Bogotá D.C.</p>
-    <h1>BMW X3</h1>
-    <p class="sub">xDrive30i · TwinPower Turbo · Tracción integral</p>
-    <div class="hero-specs">
-      <div class="spec"><div class="v">252 hp</div><div class="k">Potencia</div></div>
-      <div class="spec"><div class="v">350 Nm</div><div class="k">Torque</div></div>
-      <div class="spec"><div class="v">6,3 s</div><div class="k">0–100 km/h</div></div>
-      <div class="spec"><div class="v">xDrive</div><div class="k">Tracción</div></div>
+    <div class="hero-title">
+      <h1>BMW<span class="h1-sub">X3 xDrive30i</span></h1>
+      <p class="sub">TwinPower Turbo · Tracción integral</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contacto">Agendar visita</a>
+        <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+      </div>
     </div>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#contacto">Agendar visita</a>
-      <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+    <div class="hero-bottombar">
+      <div class="hero-statcard">
+        <div class="spec"><div class="v">252</div><div class="k">hp</div></div>
+        <div class="spec"><div class="v">6,3<small>s</small></div><div class="k">0 – 100 km/h</div></div>
+        <div class="spec"><div class="v">350</div><div class="k">Torque Nm</div></div>
+      </div>
+      <a class="hero-thumb" id="heroThumb" href="#galeria" aria-label="Ver el interior en la galería">
+        <img src="img/cockpit.jpg" alt="" loading="lazy">
+        <span class="hero-thumb-play" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
-  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
+
+<section class="hero-card">
+  <span class="hero-card-title">BMW X3</span>
+
+  <div class="hero-card-photo">
+    <img src="img/n-front34-mobile.jpg" srcset="img/n-front34-mobile.jpg 640w, img/n-front34.jpg 1600w" sizes="(max-width: 760px) 300px" alt="BMW X3 xDrive30i blanca, vista frontal" loading="eager" fetchpriority="high">
+  </div>
+
+  <p class="hero-card-name">xDrive30i · 2019</p>
+  <p class="hero-card-sub">TwinPower Turbo · Tracción integral</p>
+
+  <div class="hero-card-rings">
+    <div class="ring-item">
+      <div class="ring">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="100 100"></circle>
+          <circle class="ring-val" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="70 100" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <span class="ring-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 1 1 16 0"></path><line x1="12" y1="16" x2="15" y2="11"></line><circle cx="12" cy="16" r="1"></circle></svg>
+        </span>
+      </div>
+      <div class="ring-label">76 mil km</div>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="100 100"></circle>
+          <circle class="ring-val" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="85 100" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <span class="ring-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="14" height="9" rx="1.5"></rect><rect x="7" y="5" width="3" height="4"></rect><rect x="12" y="5" width="3" height="4"></rect><line x1="18" y1="12" x2="21" y2="12"></line><line x1="18" y1="15" x2="21" y2="15"></line></svg>
+        </span>
+      </div>
+      <div class="ring-label">252 hp</div>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="100 100"></circle>
+          <circle class="ring-val" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="60 100" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <span class="ring-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2 2.5-2.5z"></path></svg>
+        </span>
+      </div>
+      <div class="ring-label">350 Nm</div>
+    </div>
+
+    <div class="ring-item">
+      <div class="ring">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring-track" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="100 100"></circle>
+          <circle class="ring-val" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="90 100" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <span class="ring-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"></circle><line x1="12" y1="13" x2="12" y2="9"></line><line x1="12" y1="13" x2="15" y2="14.5"></line><line x1="9" y1="3" x2="15" y2="3"></line><line x1="12" y1="3" x2="12" y2="5"></line></svg>
+        </span>
+      </div>
+      <div class="ring-label">6,3 s</div>
+    </div>
+  </div>
+
+  <a class="hero-card-cta" href="#contacto">
+    <span class="cta-label">Agendar visita</span>
+    <span class="cta-meta">Modelo 2019<i class="cta-dot" aria-hidden="true"></i></span>
+  </a>
+
+  <p class="hero-card-links"><a href="#galeria">Ver galería completa</a></p>
 </section>
 
 <section class="statement">
   <div class="wrap-narrow reveal">
-    <p class="eyebrow">El Sport Activity Vehicle</p>
-    <h2>La presencia de un SUV.<br>El alma de un deportivo.<br><em>Cuidada como el primer día, lista para su próximo dueño.</em></h2>
+    <h2>Cuidada como el primer día. Lista para ti.</h2>
   </div>
 </section>
 
-<section class="stats" aria-label="Cifras principales">
+<section class="stats" aria-label="Ficha rápida">
   <div class="stats-grid">
-    <div class="stat reveal"><div class="num"><span data-count="252">0</span><small>hp</small></div><div class="label">Potencia</div></div>
-    <div class="stat reveal"><div class="num"><span data-count="350">0</span><small>Nm</small></div><div class="label">Torque</div></div>
-    <div class="stat reveal"><div class="num"><span data-count="6.3" data-decimals="1">0</span><small>s</small></div><div class="label">0–100 km/h</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="2019">0</span></div><div class="label">Modelo</div></div>
     <div class="stat reveal"><div class="num"><span data-count="76">0</span><small>mil km</small></div><div class="label">Recorrido</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="8">0</span><small>vel.</small></div><div class="label">Transmisión</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="4">0</span><small>cil.</small></div><div class="label">Motor 2.0L Turbo</div></div>
   </div>
 </section>
 
 <section id="diseno" class="light">
   <div class="split">
-    <div class="split-media reveal" data-parallax><img src="img/side.jpg" alt="Perfil lateral de la BMW X3 blanca con rines bicolor" loading="lazy"></div>
+    <div class="split-media wide-crop reveal" data-parallax><img src="img/side.jpg" alt="Perfil lateral de la BMW X3 blanca con rines bicolor" loading="lazy"></div>
     <div class="split-copy reveal">
       <p class="eyebrow">Diseño exterior</p>
       <h3>Proporciones que imponen. Líneas que fluyen.</h3>
-      <p>Silueta atlética en blanco alpino con contrastes en negro, parrilla doble riñón cromada y firma lumínica LED. Una presencia inconfundible desde cualquier ángulo.</p>
+      <p>Silueta atlética en blanco alpino, parrilla doble riñón cromada y firma lumínica LED — inconfundible desde cualquier ángulo.</p>
       <ul>
         <li>Faros full LED con luces diurnas hexagonales</li>
         <li>Rines de aleación bicolor de doble radio</li>
@@ -750,11 +1173,11 @@
     </div>
   </div>
   <div class="split flip">
-    <div class="split-media reveal" data-parallax><img src="img/rear34.jpg" alt="Vista trasera tres cuartos de la BMW X3 con stops LED" loading="lazy"></div>
+    <div class="split-media reveal" data-parallax><img src="img/n-taillight.jpg" alt="Detalle del stop LED tridimensional y el emblema xDrive30i" loading="lazy"></div>
     <div class="split-copy reveal">
       <p class="eyebrow">Carácter deportivo</p>
       <h3>Cada detalle, pensado para el camino.</h3>
-      <p>Stops LED tridimensionales, doble salida de escape cromada y protección inferior estilo off-road. Deportividad y elegancia en el mismo trazo.</p>
+      <p>Detalles que refuerzan su carácter deportivo, sin perder elegancia.</p>
       <ul>
         <li>Stops LED con diseño tridimensional</li>
         <li>Doble salida de escape en acero</li>
@@ -770,11 +1193,10 @@
     <div class="split-copy reveal">
       <p class="eyebrow">Interior</p>
       <h3>Un cockpit orientado al conductor.</h3>
-      <p>Cuero negro, molduras en madera fina e iluminación ambiental. Tecnología BMW iDrive con pantalla central, modos de manejo y encendido por botón.</p>
+      <p>Molduras en madera fina e iluminación ambiental envolvente.</p>
       <ul>
         <li>Tapicería en cuero negro</li>
         <li>Sistema iDrive con pantalla central</li>
-        <li>Modos de manejo Comfort · Sport · Eco Pro</li>
         <li>Climatización automática</li>
       </ul>
     </div>
@@ -784,13 +1206,90 @@
     <div class="split-copy reveal">
       <p class="eyebrow">Espacio y luz</p>
       <h3>Techo panorámico. Amplitud real.</h3>
-      <p>Segunda fila con espacio generoso, salidas de aire dedicadas e iluminación ambiental perimetral. El techo corredizo panorámico llena la cabina de luz natural.</p>
+      <p>Segunda fila amplia y llena de luz natural gracias al techo panorámico.</p>
       <ul>
         <li>Techo corredizo panorámico eléctrico</li>
-        <li>Iluminación ambiental en puertas y tablero</li>
+        <li>Luces LED en puertas y tablero</li>
         <li>Salidas de climatización para la segunda fila</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section id="eco" class="modes">
+  <span id="modos"></span>
+  <div class="wrap">
+    <div class="eco-lead reveal">
+      <p class="eyebrow">Driving Experience Control · Eficiencia</p>
+      <h2>Tres modos de manejo.<br><em>Uno que te ahorra gasolina.</em></h2>
+      <p>Bajo el capó late un motor 2.0L TwinPower Turbo de 252 hp, conectado a una transmisión automática Steptronic de 8 velocidades que cambia sola y sin tirones. El selector Driving Experience Control ajusta cómo se sienten juntos: Comfort para el día a día, Sport cuando el camino invita… y el protagonista, ECO PRO, que suaviza el acelerador y aprovecha el impulso del carro para planear en coasting, estirando cada tanqueada hasta unos 540 km. Toca cada modo y mira cómo cambia el carácter.</p>
+    </div>
+
+    <div class="eco-cluster reveal" id="modeCluster">
+      <div class="cluster-top">
+        <span class="status"><i></i> <span id="modeStatus">ECO PRO · Activo</span></span>
+        <span class="cluster-cap">Ilustración interactiva</span>
+      </div>
+
+      <div class="mode-tabs" role="tablist" aria-label="Modos de manejo">
+        <button class="mode-tab" data-mode="comfort" type="button">Comfort</button>
+        <button class="mode-tab" data-mode="sport" type="button">Sport</button>
+        <button class="mode-tab active" data-mode="eco" type="button">Eco Pro</button>
+      </div>
+
+      <div class="cluster-main">
+        <div class="gauge-block">
+          <div class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="g-track" cx="100" cy="100" r="82" pathLength="100" stroke-dasharray="75 100" transform="rotate(135 100 100)"></circle>
+              <circle class="g-dots" cx="100" cy="100" r="64" pathLength="100" stroke-dasharray="0.4 1.6"></circle>
+              <circle class="g-val" id="gaugeResp" cx="100" cy="100" r="82" pathLength="100" stroke-dasharray="0 100" transform="rotate(135 100 100)"></circle>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-num"><span id="numResp">0</span></div>
+              <div class="gauge-unit" id="unitG1">L / 100 km</div>
+            </div>
+          </div>
+          <div class="gauge-label" id="labelG1">Consumo medio</div>
+        </div>
+
+        <div class="eco-bars">
+          <div class="bar-item">
+            <div class="bar"><span id="barAcc" style="height:0%"></span></div>
+            <div class="bar-k" id="barKA">Acelerador</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar"><span id="barDir" style="height:0%"></span></div>
+            <div class="bar-k" id="barKB">Coasting</div>
+          </div>
+        </div>
+
+        <div class="gauge-block">
+          <div class="gauge">
+            <svg class="gauge-svg" viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="g-track" cx="100" cy="100" r="82" pathLength="100" stroke-dasharray="75 100" transform="rotate(135 100 100)"></circle>
+              <circle class="g-dots" cx="100" cy="100" r="64" pathLength="100" stroke-dasharray="0.4 1.6"></circle>
+              <circle class="g-val" id="gaugeRpm" cx="100" cy="100" r="82" pathLength="100" stroke-dasharray="0 100" transform="rotate(135 100 100)"></circle>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-num"><span id="numRpm">0</span></div>
+              <div class="gauge-unit" id="unitG2">km de autonomía</div>
+            </div>
+          </div>
+          <div class="gauge-label" id="labelG2">Alcance estimado</div>
+        </div>
+      </div>
+
+      <p class="mode-desc" id="modeDesc">El protagonista: suelta el acelerador y el carro planea en coasting, gastando lo mínimo. Hasta 20% menos consumo y unos 540 km por tanqueada.</p>
+
+      <div class="eco-chips">
+        <div class="chip"><b>Hasta 20%</b><span>Menos consumo en ECO PRO</span></div>
+        <div class="chip"><b>Coasting</b><span>Rodaje libre en carretera</span></div>
+        <div class="chip"><b>≈ 540 km</b><span>Autonomía por tanqueada</span></div>
+      </div>
+    </div>
+
+    <p class="eco-note reveal">Es un motor a gasolina, no un híbrido — las cifras del tablero son ilustrativas. El consumo real depende de cómo manejes, pero la idea siempre es la misma: gastar menos.</p>
   </div>
 </section>
 
@@ -817,7 +1316,7 @@
         <tr><th scope="row">Ubicación</th><td>Bogotá D.C., Colombia</td></tr>
       </tbody>
     </table>
-    <p class="spec-note reveal">Cifras de potencia, torque y aceleración corresponden a la ficha de fábrica del BMW X3 xDrive30i (G01). Es un vehículo de segunda mano, pero está al día en todo: papeles, matrícula y mantenimientos. Si quiere hacerle un peritaje antes de decidir, con gusto lo llevamos al centro autorizado o reconocido que usted prefiera.</p>
+    <p class="spec-note reveal">Cifras de potencia, torque y aceleración según ficha de fábrica del BMW X3 xDrive30i (G01). Papeles, matrícula y mantenimientos al día.</p>
   </div>
 </section>
 
@@ -830,13 +1329,16 @@
     <div class="gallery-grid" id="galleryGrid">
       <button class="g-item wide reveal" type="button"><img src="img/front-low.jpg" alt="Frontal tres cuartos en ángulo bajo, con arborización de fondo" loading="lazy"><span class="g-tag">Exterior</span></button>
       <button class="g-item reveal" type="button"><img src="img/front.jpg" alt="Vista frontal con parrilla doble riñón y luces LED encendidas" loading="lazy"><span class="g-tag">Frontal</span></button>
-      <button class="g-item tall reveal" type="button"><img src="img/portrait.jpg" alt="Detalle del rin y la llanta Bridgestone" loading="lazy"><span class="g-tag">Detalle</span></button>
+      <button class="g-item reveal" type="button"><img src="img/portrait.jpg" alt="Detalle del rin y la llanta Bridgestone" loading="lazy"><span class="g-tag">Detalle</span></button>
       <button class="g-item reveal" type="button"><img src="img/side-green.jpg" alt="Detalle del faro LED y la parrilla delantera" loading="lazy"><span class="g-tag">Detalle</span></button>
       <button class="g-item reveal" type="button"><img src="img/rear34.jpg" alt="Vista trasera de la BMW X3 en entorno urbano" loading="lazy"><span class="g-tag">Trasera</span></button>
       <button class="g-item reveal" type="button"><img src="img/cockpit.jpg" alt="Puesto de conducción" loading="lazy"><span class="g-tag">Interior</span></button>
       <button class="g-item wide reveal" type="button"><img src="img/rear34-sun.jpg" alt="Detalle de acabados interiores con iluminación ambiental azul" loading="lazy"><span class="g-tag">Interior</span></button>
       <button class="g-item reveal" type="button"><img src="img/seats.jpg" alt="Interior amplio y luminoso de la BMW X3" loading="lazy"><span class="g-tag">Interior</span></button>
-      <button class="g-item reveal" type="button"><img src="img/hero.jpg" alt="Frontal tres cuartos en entorno urbano" loading="lazy"><span class="g-tag">Exterior</span></button>
+      <button class="g-item reveal" type="button"><img src="img/n-engine.jpg" alt="Motor 2.0 TwinPower Turbo en compartimiento impecable" loading="lazy"><span class="g-tag">Motor</span></button>
+      <button class="g-item reveal" type="button"><img src="img/n-trunk.jpg" alt="Baúl amplio con cubierta retráctil y portalón eléctrico abierto" loading="lazy"><span class="g-tag">Baúl</span></button>
+      <button class="g-item reveal" type="button"><img src="img/n-seats.jpg" alt="Banca trasera en cuero negro con salidas de aire dedicadas" loading="lazy"><span class="g-tag">Asientos</span></button>
+      <button class="g-item reveal" type="button"><img src="img/n-taillight.jpg" alt="Detalle del stop LED y emblema xDrive30i" loading="lazy"><span class="g-tag">Detalle</span></button>
     </div>
   </div>
 </section>
@@ -844,11 +1346,10 @@
 <section class="contact light" id="contacto">
   <div class="wrap-narrow reveal">
     <p class="eyebrow">Contacto</p>
-    <h2>Agende su visita.<br>Conózcala en persona.</h2>
-    <p>Es un carro de segunda mano, pero cuidado como si fuera nuevo: papeles al día y sin sorpresas. Puede verlo y probarlo en Bogotá D.C., y si prefiere hacerle un peritaje antes de decidir, lo llevamos al taller o centro autorizado que usted elija.</p>
+    <h2>Agenda tu visita.<br>Conócela en persona.</h2>
+    <p>Puedes verla y probarla en Bogotá, o llevarla a peritaje antes de decidir.</p>
     <div class="contact-actions">
       <a class="btn btn-whatsapp" id="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="btn btn-ghost" id="telLink" href="#">Llamar</a>
     </div>
     <p class="contact-meta" id="contactMeta"></p>
   </div>
@@ -863,7 +1364,6 @@
 
 <div class="mobile-cta" id="mobileCta">
   <a class="btn btn-whatsapp" id="waLinkBar" href="#" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="btn btn-ghost" id="telLinkBar" href="#">Llamar</a>
 </div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería ampliada">
@@ -888,11 +1388,8 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const waHref = "https://wa.me/" + CONTACTO.whatsapp + "?text=" + encodeURIComponent(CONTACTO.mensaje);
-  const telHref = "tel:" + CONTACTO.telefono.replace(/\s/g, "");
   document.getElementById("waLink").href = waHref;
-  document.getElementById("telLink").href = telHref;
   document.getElementById("waLinkBar").href = waHref;
-  document.getElementById("telLinkBar").href = telHref;
   document.getElementById("contactMeta").textContent = CONTACTO.telefono + " · Bogotá D.C.";
 
   // Header sólido + barra de progreso + parallax del hero
@@ -973,6 +1470,92 @@
   }, { threshold: 0.6 });
   document.querySelectorAll("[data-count]").forEach(el => ioCount.observe(el));
 
+  // Modos de manejo + Eco Pro: cluster interactivo fusionado
+  const modesSection = document.getElementById("eco");
+  if (modesSection) {
+    const MODES = {
+      comfort: {
+        color: "#c8d2dd", glow: "rgba(200,210,221,.5)", label: "COMFORT",
+        g1: { v: 55, d: 0, arc: 41.3, unit: "% respuesta", label: "Acelerador y motor" },
+        g2: { v: 2.4, d: 1, arc: 25.7, unit: "x1000 rpm", label: "Cambio de marcha" },
+        bars: [45, 40], barLabels: ["Acelerador", "Dirección"],
+        desc: "El modo de todos los días: dirección ligera, cambios suaves y andar sereno. La X3 se encarga del trajín y tú llegas descansado."
+      },
+      sport: {
+        color: "#e7222d", glow: "rgba(231,34,45,.55)", label: "SPORT",
+        g1: { v: 92, d: 0, arc: 69, unit: "% respuesta", label: "Acelerador y motor" },
+        g2: { v: 4.8, d: 1, arc: 51.4, unit: "x1000 rpm", label: "Cambio de marcha" },
+        bars: [90, 85], barLabels: ["Acelerador", "Dirección"],
+        desc: "El acelerador responde al instante, los cambios suben de vueltas y la dirección se siente más firme. Los 252 hp, listos cuando el camino invita."
+      },
+      eco: {
+        color: "#3db6ed", glow: "rgba(61,182,237,.55)", label: "ECO PRO",
+        g1: { v: 6.8, d: 1, arc: 34, unit: "L / 100 km", label: "Consumo medio" },
+        g2: { v: 540, d: 0, arc: 58, unit: "km de autonomía", label: "Alcance estimado" },
+        bars: [16, 82], barLabels: ["Acelerador", "Coasting"],
+        desc: "El protagonista: suelta el acelerador y el carro planea en coasting, gastando lo mínimo. Hasta 20% menos consumo y unos 540 km por tanqueada."
+      }
+    };
+    const gaugeResp = document.getElementById("gaugeResp");
+    const gaugeRpm = document.getElementById("gaugeRpm");
+    const numResp = document.getElementById("numResp");
+    const numRpm = document.getElementById("numRpm");
+    const unitG1 = document.getElementById("unitG1");
+    const unitG2 = document.getElementById("unitG2");
+    const labelG1 = document.getElementById("labelG1");
+    const labelG2 = document.getElementById("labelG2");
+    const barAcc = document.getElementById("barAcc");
+    const barDir = document.getElementById("barDir");
+    const barKA = document.getElementById("barKA");
+    const barKB = document.getElementById("barKB");
+    const modeDesc = document.getElementById("modeDesc");
+    const modeStatus = document.getElementById("modeStatus");
+    const tabs = Array.from(modesSection.querySelectorAll(".mode-tab"));
+
+    const tween = (el, to, decimals) => {
+      const from = parseFloat((el.textContent || "0").replace(",", ".")) || 0;
+      if (reduceMotion) { el.textContent = to.toFixed(decimals).replace(".", ","); return; }
+      const dur = 900;
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (from + (to - from) * eased).toFixed(decimals).replace(".", ",");
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const setMode = (name) => {
+      const m = MODES[name];
+      modesSection.style.setProperty("--mcol", m.color);
+      modesSection.style.setProperty("--mglow", m.glow);
+      gaugeResp.style.strokeDasharray = m.g1.arc + " 100";
+      gaugeRpm.style.strokeDasharray = m.g2.arc + " 100";
+      tween(numResp, m.g1.v, m.g1.d);
+      tween(numRpm, m.g2.v, m.g2.d);
+      unitG1.textContent = m.g1.unit;
+      unitG2.textContent = m.g2.unit;
+      labelG1.textContent = m.g1.label;
+      labelG2.textContent = m.g2.label;
+      barAcc.style.height = m.bars[0] + "%";
+      barDir.style.height = m.bars[1] + "%";
+      barKA.textContent = m.barLabels[0];
+      barKB.textContent = m.barLabels[1];
+      modeDesc.textContent = m.desc;
+      modeStatus.textContent = m.label + " · Activo";
+      tabs.forEach(b => b.classList.toggle("active", b.dataset.mode === name));
+    };
+    tabs.forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+
+    const ioModes = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { setMode("eco"); ioModes.disconnect(); }
+      }
+    }, { threshold: 0.35 });
+    ioModes.observe(document.getElementById("modeCluster"));
+  }
+
   // Lightbox con transiciones y gestos
   const items = Array.from(document.querySelectorAll("#galleryGrid .g-item img"));
   const lightbox = document.getElementById("lightbox");
@@ -1011,6 +1594,12 @@
   };
 
   items.forEach((img, i) => img.closest(".g-item").addEventListener("click", () => openLb(i)));
+  // Miniatura del hero: abre el interior en el lightbox
+  const cockpitIdx = items.findIndex(img => img.src.includes("cockpit"));
+  document.getElementById("heroThumb").addEventListener("click", (e) => {
+    e.preventDefault();
+    openLb(cockpitIdx >= 0 ? cockpitIdx : 0);
+  });
   document.getElementById("lbClose").addEventListener("click", closeLb);
   document.getElementById("lbPrev").addEventListener("click", () => step(-1));
   document.getElementById("lbNext").addEventListener("click", () => step(1));
