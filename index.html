@@ -6,7 +6,6 @@
 <title>BMW X3 xDrive30i 2019 — 76.000 km · Bogotá</title>
 <meta name="description" content="BMW X3 xDrive30i modelo 2019, 76.000 km. Motor TwinPower Turbo de 252 hp, tracción integral xDrive, techo panorámico e interior en cuero. Agenda tu visita en Bogotá.">
 <link rel="preload" as="image" href="img/hero-bg.jpg">
-<link rel="preload" as="image" href="img/hero-car.webp" imagesrcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" imagesizes="(max-width: 760px) 170vw, 62vw">
 <style>
   :root {
     --bg: #0a0b0e;
@@ -19,12 +18,12 @@
     --line-strong: rgba(255,255,255,.18);
     --accent: #2ea8e0;
     --eco: #3db6ed;
-    --bg-light: #f7f6f3;
+    --bg-light: #dcd9d2;
     --ink-light: #121316;
     --soft-light: #45484e;
-    --muted-light: #767a82;
-    --line-light: rgba(10,11,14,.1);
-    --line-light-strong: rgba(10,11,14,.2);
+    --muted-light: #6b6e74;
+    --line-light: rgba(10,11,14,.12);
+    --line-light-strong: rgba(10,11,14,.22);
     --font: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --pad: clamp(1.25rem, 5vw, 4rem);
     --radius: 2px;
@@ -146,6 +145,102 @@
     .header-cta { font-size: .68rem; padding: .5rem .8rem; }
   }
 
+  /* ---------- Menú mobile: botón hamburguesa ---------- */
+  .menu-toggle {
+    position: relative;
+    z-index: 210;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .25s, background .25s;
+  }
+  .menu-toggle:hover { border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.06); }
+  .menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: #fff;
+    transition: transform .4s cubic-bezier(.65,0,.35,1), opacity .25s ease, width .3s ease;
+  }
+  .menu-toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .menu-toggle.is-open span:nth-child(2) { opacity: 0; width: 0; }
+  .menu-toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  @media (min-width: 900px) { .menu-toggle { display: none; } }
+
+  /* ---------- Menú mobile: overlay a pantalla completa ---------- */
+  body.nav-open { overflow: hidden; }
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.2rem;
+    padding: 6rem var(--pad) 3rem;
+    background:
+      radial-gradient(130% 100% at 100% 0%, rgba(24,28,36,.99), rgba(6,7,10,.995) 62%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    clip-path: circle(2% at calc(100% - 2.7rem) 2.5rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: clip-path .65s cubic-bezier(.65,0,.35,1), opacity .1s linear .55s, visibility 0s linear .65s;
+  }
+  .mobile-nav.is-open {
+    clip-path: circle(150% at calc(100% - 2.7rem) 2.5rem);
+    opacity: 1;
+    visibility: visible;
+    transition: clip-path .65s cubic-bezier(.65,0,.35,1), opacity .1s linear, visibility 0s;
+  }
+  @media (min-width: 900px) { .mobile-nav { display: none; } }
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+  }
+  .mobile-nav-links a {
+    font-size: clamp(1.7rem, 8.5vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: -.01em;
+    padding: .6rem 0;
+    color: #fff;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(28px);
+    transition: transform .5s cubic-bezier(.2,.6,.2,1), opacity .5s ease;
+  }
+  .mobile-nav-links a:last-child { border-bottom: 0; }
+  .mobile-nav-links a:active { color: var(--accent); }
+  .mobile-nav.is-open .mobile-nav-links a { opacity: 1; transform: none; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(1) { transition-delay: .24s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(2) { transition-delay: .30s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(3) { transition-delay: .36s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(4) { transition-delay: .42s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(5) { transition-delay: .48s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(6) { transition-delay: .54s; }
+  .mobile-nav.is-open .mobile-nav-links a:nth-child(7) { transition-delay: .60s; }
+  .mobile-nav-cta {
+    align-self: flex-start;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: transform .5s cubic-bezier(.2,.6,.2,1) .64s, opacity .5s ease .64s;
+  }
+  .mobile-nav.is-open .mobile-nav-cta { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav, .mobile-nav-links a, .mobile-nav-cta, .menu-toggle span { transition: none !important; }
+  }
+
   /* ---------- Hero (capas: calle nocturna + auto PNG) ---------- */
   .hero {
     position: relative;
@@ -164,7 +259,7 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background: url("img/hero-bg.jpg") center 76% / cover no-repeat;
+    background: url("img/hero-bg.jpg") 0% 58% / cover no-repeat;
     animation: heroZoom 20s cubic-bezier(.2,.5,.3,1) forwards;
   }
   @keyframes heroZoom {
@@ -177,35 +272,9 @@
     inset: 0;
     z-index: 0;
     background:
-      linear-gradient(100deg, rgba(6,7,10,.55) 0%, rgba(6,7,10,.3) 30%, rgba(6,7,10,.05) 52%, rgba(6,7,10,0) 66%),
-      linear-gradient(to top, rgba(6,7,10,.5) 0%, rgba(6,7,10,.12) 22%, rgba(6,7,10,0) 42%);
-  }
-  .hero-car {
-    position: absolute;
-    z-index: 1;
-    right: 0.5%;
-    bottom: 20%;
-    width: min(65%, 970px);
-    height: auto;
-    filter: drop-shadow(0 40px 30px rgba(0,0,0,.5)) drop-shadow(0 10px 10px rgba(0,0,0,.4));
-    animation: carIn 1.3s cubic-bezier(.2,.6,.2,1) .45s both;
-    pointer-events: none;
-  }
-  @keyframes carIn {
-    from { opacity: 0; transform: translateX(5%); }
-    to   { opacity: 1; transform: none; }
-  }
-  .hero-car-shadow {
-    position: absolute;
-    z-index: 1;
-    right: 4.5%;
-    bottom: calc(20% - 1.5%);
-    width: min(50%, 740px);
-    height: 4.5%;
-    min-height: 20px;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.28) 45%, rgba(0,0,0,0) 75%);
-    animation: carIn 1.3s cubic-bezier(.2,.6,.2,1) .45s both;
-    pointer-events: none;
+      linear-gradient(100deg, rgba(6,7,10,.55) 0%, rgba(6,7,10,.3) 28%, rgba(6,7,10,.06) 52%, rgba(6,7,10,0) 68%),
+      linear-gradient(to top, rgba(6,7,10,.5) 0%, rgba(6,7,10,.12) 24%, rgba(6,7,10,0) 44%),
+      linear-gradient(to bottom, rgba(6,7,10,.3) 0%, rgba(6,7,10,0) 18%);
   }
   .hero-dots {
     position: absolute;
@@ -230,127 +299,149 @@
     z-index: 2;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: clamp(4.5rem, 10vh, 6rem) var(--pad) clamp(1.6rem, 4vh, 2.4rem);
     will-change: transform, opacity;
   }
-  .hero-title { margin: 0 0 auto; padding-left: clamp(0rem, 3vw, 2.5rem); max-width: 34rem; }
-  .hero-content > .hero-title,
-  .hero-content > .hero-bottombar {
-    opacity: 0;
-    transform: translateY(28px);
-    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) forwards;
-  }
-  .hero-content > .hero-title { animation-delay: .25s; }
-  .hero-content > .hero-bottombar { animation-delay: .55s; }
   @keyframes heroRise {
     to { opacity: 1; transform: none; }
   }
-  .hero-eyebrow {
-    display: block;
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.75);
-    margin-bottom: 1.2rem;
+
+  /* ---------- Título centrado con pill (estilo showcase) ---------- */
+  .hero-titleblock {
+    position: absolute;
+    left: 0; right: 0;
+    top: clamp(4.4rem, 11vh, 6.4rem);
+    width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) .25s forwards;
   }
-  .hero-content h1 {
-    font-size: clamp(3.4rem, 10vw, 7.4rem);
-    line-height: .96;
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: .5rem 1.15rem;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.85);
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 1.4rem;
+  }
+  .hero-titleblock h1 {
+    font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+    line-height: 1.04;
     letter-spacing: -.02em;
     text-shadow: 0 2px 28px rgba(0,0,0,.55), 0 1px 4px rgba(0,0,0,.4);
   }
-  .hero-content h1 .h1-sub {
+  .hero-titleblock h1 .h1-sub {
     display: block;
-    font-size: .56em;
+    font-size: .58em;
     font-weight: 300;
     letter-spacing: .01em;
-    color: rgba(255,255,255,.95);
-    margin-top: .08em;
-  }
-  .hero-content .sub {
-    margin-top: 1.1rem;
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
-    font-weight: 300;
-    letter-spacing: .02em;
     color: rgba(255,255,255,.92);
-    text-shadow: 0 1px 14px rgba(0,0,0,.6);
+    margin-top: .14em;
   }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.8rem; }
 
-  /* ---------- Hero bottom bar (specs + miniatura) ---------- */
-  .hero-bottombar {
+  /* ---------- Ficha flotante izquierda (glass cards) ---------- */
+  .hero-spec-stack {
+    position: absolute;
+    left: var(--pad);
+    top: clamp(9.5rem, 27vh, 14.5rem);
+    z-index: 2;
     display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    width: 100%;
+    flex-direction: column;
+    gap: .85rem;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) .48s forwards;
   }
-  .hero-statcard {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 1rem 2rem;
-    padding: clamp(1.2rem, 3vw, 1.9rem) clamp(1.2rem, 3vw, 2.5rem);
-    background: rgba(190,196,206,.22);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,.16);
+  .hero-spec-card {
+    min-width: 148px;
+    padding: 1rem 1.3rem;
+    background: rgba(22,24,30,.4);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,.15);
     border-radius: 12px;
-    text-align: center;
   }
-  .hero-statcard .v {
-    font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  .hero-spec-row + .hero-spec-row {
+    margin-top: .8rem;
+    padding-top: .8rem;
+    border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .hero-spec-row .v {
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     font-weight: 700;
-    letter-spacing: -.02em;
     line-height: 1;
+    letter-spacing: -.01em;
     font-variant-numeric: tabular-nums;
   }
-  .hero-statcard .v small { font-size: .5em; font-weight: 600; margin-left: .08em; }
-  .hero-statcard .k {
-    font-size: clamp(.78rem, 1.4vw, .95rem);
-    font-weight: 400;
-    color: rgba(255,255,255,.85);
-    margin-top: .45rem;
+  .hero-spec-row .v small { font-size: .48em; font-weight: 600; margin-left: .15em; }
+  .hero-spec-row .k { font-size: .7rem; color: rgba(255,255,255,.72); margin-top: .3rem; }
+  @media (max-width: 1080px) { .hero-spec-stack { display: none; } }
+
+  /* ---------- Tagline + CTAs (abajo izquierda) ---------- */
+  .hero-bottom-left {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: clamp(1.6rem, 4vh, 2.4rem);
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(28px);
+    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) .62s forwards;
   }
+  .hero-tagline {
+    max-width: 22rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -.01em;
+    text-shadow: 0 1px 5px rgba(0,0,0,.75), 0 2px 22px rgba(0,0,0,.7);
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.3rem; }
+
+  /* ---------- Miniatura interior (abajo derecha) ---------- */
   .hero-thumb {
-    position: relative;
-    flex: 0 0 auto;
-    width: clamp(220px, 26vw, 330px);
-    aspect-ratio: 16 / 9.5;
+    position: absolute;
+    right: var(--pad);
+    bottom: clamp(1.6rem, 4vh, 2.4rem);
+    z-index: 2;
+    width: clamp(190px, 19vw, 250px);
+    aspect-ratio: 16 / 10;
     border-radius: 12px;
     overflow: hidden;
     display: block;
+    border: 1px solid rgba(255,255,255,.16);
+    opacity: 0;
+    transform: translateY(28px);
+    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) .72s forwards;
   }
   .hero-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-thumb-play {
+  .hero-thumb-label {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    left: .6rem;
+    bottom: .55rem;
+    padding: .38rem .75rem;
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .13em;
+    text-transform: uppercase;
     color: #fff;
-    transition: background .25s;
+    background: rgba(10,11,14,.55);
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background .25s, border-color .25s;
   }
-  .hero-thumb-play::before {
-    content: "";
-    width: 58px; height: 58px;
-    border: 1.5px solid rgba(255,255,255,.9);
-    border-radius: 50%;
-    position: absolute;
-    transition: transform .3s;
-  }
-  .hero-thumb-play::after {
-    content: "";
-    width: 0; height: 0;
-    border-left: 13px solid #fff;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    margin-left: 4px;
-  }
-  .hero-thumb:hover .hero-thumb-play::before { transform: scale(1.12); }
+  .hero-thumb:hover .hero-thumb-label { background: rgba(10,11,14,.8); border-color: rgba(255,255,255,.5); }
   @media (max-width: 860px) { .hero-thumb { display: none; } }
 
   /* ---------- Buttons ---------- */
@@ -488,7 +579,10 @@
     overflow: hidden;
     pointer-events: none;
   }
-  @media (max-width: 520px) { .eco-chips { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) {
+    .eco-chips { grid-template-columns: 1fr; max-height: 340px; }
+    .eco-note { max-height: 160px; }
+  }
   .chip {
     border: 1px solid var(--line); border-radius: var(--radius);
     padding: .95rem 1.1rem; display: flex; flex-direction: column; gap: .2rem;
@@ -636,7 +730,7 @@
     margin: 0 auto;
     text-align: center;
   }
-  @media (min-width: 760px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 760px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
   .stat .num {
     font-size: clamp(2.4rem, 5.5vw, 3.6rem);
     font-weight: 700;
@@ -916,7 +1010,9 @@
   .mobile-cta.show { transform: none; }
   .mobile-cta .btn { flex: 1; padding: .8rem 1rem; font-size: .76rem; }
 
-  /* ---------- Hero en mobile: mismas capas, composición vertical ---------- */
+  /* ---------- Hero en mobile: foto completa + texto integrado sobre el degradado ---------- */
+  .hero-photo-mobile-wrap { display: none; }
+  .hero-photo-mobile { width: 100%; height: auto; display: block; }
   @media (max-width: 760px) {
     .site-header {
       background: rgba(10,11,14,.88) !important;
@@ -926,46 +1022,68 @@
       height: 60px !important;
     }
     .hero {
+      display: block;
       margin: calc(60px + .9rem) .9rem 0;
       height: auto;
       min-height: 0;
       border-radius: 20px;
-      align-items: stretch;
     }
-    .hero-bg { background-position: 62% 100%; }
-    .hero-dots { display: none; }
-    .hero-car-shadow { display: none; }
-    .hero-content { height: auto; padding: 1.7rem 1.15rem 1.15rem; }
-    .hero-title { margin: 0; padding-left: 0; max-width: none; }
+    .hero-bg, .hero-dots { display: none; }
+    .hero::after { content: none; }
+    .hero-photo-mobile-wrap {
+      display: block;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .hero-photo-mobile {
+      animation: heroZoom 16s cubic-bezier(.2,.5,.3,1) forwards;
+    }
+    .hero-photo-mobile-wrap::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 62%;
+      background: linear-gradient(to bottom, transparent, rgba(7,8,11,.85) 68%, var(--bg-2) 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      margin-top: -6.4rem;
+      padding: 0 1.15rem 1.4rem;
+      background: linear-gradient(to bottom, transparent, var(--bg-2) 6.4rem);
+    }
+    .hero-titleblock {
+      position: static;
+      padding: 0;
+      text-align: left;
+    }
     .hero-eyebrow { font-size: .6rem; letter-spacing: .18em; margin-bottom: .9rem; }
-    .hero-content h1 { font-size: clamp(2.8rem, 14vw, 3.5rem); }
-    .hero-content .sub { font-size: .92rem; margin-top: .7rem; }
+    .hero-titleblock h1 { font-size: clamp(2.8rem, 14vw, 3.5rem); }
+
+    .hero-spec-stack {
+      display: flex;
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin-top: 1.6rem;
+    }
+    .hero-spec-card { flex: 1 1 calc(50% - .35rem); min-width: 0; }
+    .hero-spec-row .v { font-size: 1.4rem; }
+
+    .hero-bottom-left {
+      position: static;
+      max-width: none;
+      margin-top: 1.6rem;
+      padding-top: 0;
+    }
     .hero-actions { margin-top: 1.3rem; gap: .7rem; }
     .hero-actions .btn { flex: 1 1 0; padding: .95rem .4rem; font-size: .72rem; letter-spacing: .06em; }
-
-    /* El auto pasa a flujo normal: se apoya solo entre el título y las cifras, sin huecos */
-    .hero-car {
-      position: relative;
-      top: auto;
-      right: auto;
-      bottom: auto;
-      left: auto;
-      z-index: 1;
-      display: block;
-      width: 170%;
-      max-width: none;
-      margin: .6rem 0 -.5rem -35%;
-      filter: drop-shadow(0 24px 22px rgba(0,0,0,.55));
-      animation: carInUp 1s cubic-bezier(.2,.6,.2,1) .35s both;
-    }
-    @keyframes carInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: none; }
-    }
-    .hero-bottombar { position: relative; z-index: 2; margin-top: .3rem; }
-    .hero-statcard { padding: 1rem .6rem; gap: .4rem; }
-    .hero-statcard .v { font-size: 1.55rem; }
-    .hero-statcard .k { font-size: .66rem; margin-top: .3rem; }
   }
 
   /* ---------- Mobile refinements ---------- */
@@ -1070,10 +1188,9 @@
   .reveal.in { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-bg, .hero-car, .hero-content > * { animation: none !important; }
+    .hero-bg, .hero-photo-mobile, .hero-content > * { animation: none !important; }
     .g-val, .bar span { transition: none; }
-    .hero-content > *, .hero-car,
-    .hero-content > .hero-title, .hero-content > .hero-bottombar { opacity: 1 !important; transform: none !important; }
+    .hero-content > * { opacity: 1 !important; transform: none !important; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .split-media img { height: 100%; }
     html { scroll-behavior: auto; }
@@ -1096,10 +1213,29 @@
     <a href="#galeria">Galería</a>
   </nav>
   <a class="header-cta" href="#contacto">Agendar visita</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <nav class="mobile-nav-links" aria-label="Menú principal">
+    <a href="#inicio">Inicio</a>
+    <a href="#diseno">Diseño</a>
+    <a href="#interior">Interior</a>
+    <a href="#eco">Modos & Eficiencia</a>
+    <a href="#especificaciones">Especificaciones</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a class="btn btn-primary mobile-nav-cta" href="#contacto">Agendar visita</a>
+</div>
+
 <section class="hero" id="inicio" style="padding:0">
-  <div class="hero-bg" role="img" aria-label="Calle urbana de noche con asfalto mojado"></div>
+  <div class="hero-photo-mobile-wrap">
+    <img class="hero-photo-mobile" src="img/hero-bg.jpg" alt="BMW X3 xDrive30i blanca de frente, luces encendidas, calle mojada de noche" loading="eager" fetchpriority="high">
+  </div>
+  <div class="hero-bg" role="img" aria-label="BMW X3 xDrive30i blanca parqueada frente a un jardín vertical en Bogotá"></div>
   <nav class="hero-dots" aria-label="Ir a sección">
     <a href="#inicio" aria-label="Inicio"></a>
     <a href="#diseno" aria-label="Diseño"></a>
@@ -1108,28 +1244,31 @@
     <a href="#galeria" aria-label="Galería"></a>
   </nav>
   <div class="hero-content" id="heroContent">
-    <div class="hero-title">
+    <div class="hero-titleblock">
       <span class="hero-eyebrow">Modelo 2019 · 76.000 km · Bogotá D.C.</span>
       <h1>BMW<span class="h1-sub">X3 xDrive30i</span></h1>
-      <p class="sub">TwinPower Turbo · Tracción integral</p>
+    </div>
+    <div class="hero-spec-stack" aria-hidden="true">
+      <div class="hero-spec-card">
+        <div class="hero-spec-row"><div class="v">2019</div><div class="k">Modelo</div></div>
+        <div class="hero-spec-row"><div class="v">76<small>mil km</small></div><div class="k">Recorrido</div></div>
+      </div>
+      <div class="hero-spec-card">
+        <div class="hero-spec-row"><div class="v">8<small>vel.</small></div><div class="k">Transmisión</div></div>
+        <div class="hero-spec-row"><div class="v">4<small>cil.</small></div><div class="k">Motor 2.0L Turbo</div></div>
+      </div>
+    </div>
+    <div class="hero-bottom-left">
+      <p class="hero-tagline">TwinPower Turbo<br>Tracción integral</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto">Agendar visita</a>
         <a class="btn btn-ghost" href="#galeria">Ver galería</a>
       </div>
     </div>
-    <div class="hero-car-shadow" aria-hidden="true"></div>
-    <img class="hero-car" src="img/hero-car.webp" srcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" sizes="(max-width: 760px) 170vw, 62vw" alt="BMW X3 xDrive30i blanca, vista frontal tres cuartos" fetchpriority="high">
-    <div class="hero-bottombar">
-      <div class="hero-statcard">
-        <div class="spec"><div class="v">252</div><div class="k">hp</div></div>
-        <div class="spec"><div class="v">6,3<small>s</small></div><div class="k">0 – 100 km/h</div></div>
-        <div class="spec"><div class="v">350</div><div class="k">Torque Nm</div></div>
-      </div>
-      <a class="hero-thumb" id="heroThumb" href="#galeria" aria-label="Ver el interior en la galería">
-        <img src="img/cockpit.jpg" alt="" loading="lazy">
-        <span class="hero-thumb-play" aria-hidden="true"></span>
-      </a>
-    </div>
+    <a class="hero-thumb" id="heroThumb" href="#galeria" aria-label="Ver el interior en la galería">
+      <img src="img/cockpit.jpg" alt="" loading="lazy">
+      <span class="hero-thumb-label" aria-hidden="true">Ver interior</span>
+    </a>
   </div>
 </section>
 
@@ -1141,10 +1280,9 @@
 
 <section class="stats" aria-label="Ficha rápida">
   <div class="stats-grid">
-    <div class="stat reveal"><div class="num"><span data-count="2019">0</span></div><div class="label">Modelo</div></div>
-    <div class="stat reveal"><div class="num"><span data-count="76">0</span><small>mil km</small></div><div class="label">Recorrido</div></div>
-    <div class="stat reveal"><div class="num"><span data-count="8">0</span><small>vel.</small></div><div class="label">Transmisión</div></div>
-    <div class="stat reveal"><div class="num"><span data-count="4">0</span><small>cil.</small></div><div class="label">Motor 2.0L Turbo</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="252">0</span><small>hp</small></div><div class="label">Potencia</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="6.3" data-decimals="1">0</span><small>s</small></div><div class="label">0 – 100 km/h</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="350">0</span><small>Nm</small></div><div class="label">Torque</div></div>
   </div>
 </section>
 
@@ -1388,6 +1526,31 @@
   const heroContent = document.getElementById("heroContent");
   const mobileCta = document.getElementById("mobileCta");
   const docEl = document.documentElement;
+
+  // Menú mobile: overlay a pantalla completa con revelado circular
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileNav = document.getElementById("mobileNav");
+  const openMobileNav = () => {
+    mobileNav.classList.add("is-open");
+    menuToggle.classList.add("is-open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    mobileNav.setAttribute("aria-hidden", "false");
+    document.body.classList.add("nav-open");
+  };
+  const closeMobileNav = () => {
+    mobileNav.classList.remove("is-open");
+    menuToggle.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileNav.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("nav-open");
+  };
+  menuToggle.addEventListener("click", () => {
+    if (mobileNav.classList.contains("is-open")) closeMobileNav(); else openMobileNav();
+  });
+  mobileNav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMobileNav));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileNav.classList.contains("is-open")) closeMobileNav();
+  });
 
   let ticking = false;
   const onScroll = () => {
