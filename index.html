@@ -183,17 +183,29 @@
   .hero-car {
     position: absolute;
     z-index: 1;
-    right: 2%;
-    bottom: 21%;
-    width: min(62%, 920px);
+    right: 0.5%;
+    bottom: 20%;
+    width: min(65%, 970px);
     height: auto;
-    filter: drop-shadow(0 34px 26px rgba(0,0,0,.5)) drop-shadow(0 8px 8px rgba(0,0,0,.4));
+    filter: drop-shadow(0 40px 30px rgba(0,0,0,.5)) drop-shadow(0 10px 10px rgba(0,0,0,.4));
     animation: carIn 1.3s cubic-bezier(.2,.6,.2,1) .45s both;
     pointer-events: none;
   }
   @keyframes carIn {
     from { opacity: 0; transform: translateX(5%); }
     to   { opacity: 1; transform: none; }
+  }
+  .hero-car-shadow {
+    position: absolute;
+    z-index: 1;
+    right: 4.5%;
+    bottom: calc(20% - 1.5%);
+    width: min(50%, 740px);
+    height: 4.5%;
+    min-height: 20px;
+    background: radial-gradient(50% 100% at 50% 50%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.28) 45%, rgba(0,0,0,0) 75%);
+    animation: carIn 1.3s cubic-bezier(.2,.6,.2,1) .45s both;
+    pointer-events: none;
   }
   .hero-dots {
     position: absolute;
@@ -488,6 +500,11 @@
   .eco-note {
     margin: clamp(2rem, 4vw, 2.8rem) auto 0;
     text-align: center; font-size: .85rem; color: var(--muted); max-width: 640px;
+    max-height: 100px; opacity: 1;
+    transition: opacity .35s ease, max-height .45s ease, margin-top .45s ease;
+  }
+  .eco-note.is-hidden {
+    opacity: 0; max-height: 0; margin-top: 0; overflow: hidden; pointer-events: none;
   }
 
   /* ---------- Modos de manejo (cluster interactivo estilo BMW) ---------- */
@@ -917,6 +934,7 @@
     }
     .hero-bg { background-position: 62% 100%; }
     .hero-dots { display: none; }
+    .hero-car-shadow { display: none; }
     .hero-content { height: auto; padding: 1.7rem 1.15rem 1.15rem; }
     .hero-title { margin: 0; padding-left: 0; max-width: none; }
     .hero-eyebrow { font-size: .6rem; letter-spacing: .18em; margin-bottom: .9rem; }
@@ -1099,6 +1117,7 @@
         <a class="btn btn-ghost" href="#galeria">Ver galería</a>
       </div>
     </div>
+    <div class="hero-car-shadow" aria-hidden="true"></div>
     <img class="hero-car" src="img/hero-car.webp" srcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" sizes="(max-width: 760px) 170vw, 62vw" alt="BMW X3 xDrive30i blanca, vista frontal tres cuartos" fetchpriority="high">
     <div class="hero-bottombar">
       <div class="hero-statcard">
@@ -1193,7 +1212,7 @@
     <div class="eco-lead reveal">
       <p class="eyebrow">Driving Experience Control · Eficiencia</p>
       <h2>Tres modos de manejo.<br><em>Uno que te ahorra gasolina.</em></h2>
-      <p>Motor 2.0L TwinPower Turbo de 252 hp con automática Steptronic de 8 velocidades. El selector de modos cambia su carácter: Comfort, Sport… y el protagonista, ECO PRO, con coasting y hasta 540 km por tanqueada. Toca cada modo.</p>
+      <p>Motor 2.0L TwinPower Turbo de 252 hp con automática Steptronic de 8 velocidades. El selector de modos cambia su carácter: Comfort, Sport y ECO PRO, con coasting y hasta 540 km por tanqueada. Toca cada modo.</p>
     </div>
 
     <div class="eco-cluster reveal" id="modeCluster">
@@ -1251,7 +1270,7 @@
         </div>
       </div>
 
-      <p class="mode-desc" id="modeDesc">El protagonista: suelta el acelerador y el carro planea en coasting, gastando lo mínimo. Hasta 20% menos consumo y unos 540 km por tanqueada.</p>
+      <p class="mode-desc" id="modeDesc">Prioriza el ahorro: el acelerador responde más suave y, al soltarlo, el carro aprovecha el impulso para rodar sin gastar combustible (coasting). Así rinde hasta 20% más y llega a unos 540 km por tanqueada.</p>
 
       <div class="eco-chips" id="ecoChips">
         <div class="chip"><b>Hasta 20%</b><span>Menos consumo en ECO PRO</span></div>
@@ -1260,7 +1279,7 @@
       </div>
     </div>
 
-    <p class="eco-note reveal">Es un motor a gasolina, no un híbrido — las cifras del tablero son ilustrativas. El consumo real depende de cómo manejes, pero la idea siempre es la misma: gastar menos.</p>
+    <p class="eco-note reveal" id="ecoNote">Es un motor a gasolina, no un híbrido — las cifras del tablero son ilustrativas. El consumo real depende de cómo manejes, pero la idea siempre es la misma: gastar menos.</p>
   </div>
 </section>
 
@@ -1283,7 +1302,7 @@
         <tr><th scope="row">0–100 km/h</th><td>6,3 segundos</td></tr>
         <tr><th scope="row">Color exterior</th><td>Blanco alpino</td></tr>
         <tr><th scope="row">Interior</th><td>Cuero negro con molduras en madera</td></tr>
-        <tr><th scope="row">Precio</th><td>Consultar</td></tr>
+        <tr><th scope="row">Precio</th><td class="hl">$110.000.000 COP</td></tr>
         <tr><th scope="row">Ubicación</th><td>Bogotá D.C., Colombia</td></tr>
       </tbody>
     </table>
@@ -1450,21 +1469,21 @@
         g1: { v: 55, d: 0, arc: 41.3, unit: "% respuesta", label: "Acelerador y motor" },
         g2: { v: 2.4, d: 1, arc: 25.7, unit: "x1000 rpm", label: "Cambio de marcha" },
         bars: [45, 40], barLabels: ["Acelerador", "Dirección"],
-        desc: "El modo de todos los días: dirección ligera, cambios suaves y andar sereno. La X3 se encarga del trajín y tú llegas descansado."
+        desc: "Para el día a día: dirección liviana, cambios discretos y una marcha tranquila que no cansa en el tráfico ni en viajes largos."
       },
       sport: {
         color: "#e7222d", glow: "rgba(231,34,45,.55)", label: "SPORT",
         g1: { v: 92, d: 0, arc: 69, unit: "% respuesta", label: "Acelerador y motor" },
         g2: { v: 4.8, d: 1, arc: 51.4, unit: "x1000 rpm", label: "Cambio de marcha" },
         bars: [90, 85], barLabels: ["Acelerador", "Dirección"],
-        desc: "El acelerador responde al instante, los cambios suben de vueltas y la dirección se siente más firme. Los 252 hp, listos cuando el camino invita."
+        desc: "El acelerador responde de inmediato, la caja retiene más las marchas y la dirección pesa un poco más — para sentir los 252 hp cuando el camino lo pide."
       },
       eco: {
         color: "#3db6ed", glow: "rgba(61,182,237,.55)", label: "ECO PRO",
         g1: { v: 6.8, d: 1, arc: 34, unit: "L / 100 km", label: "Consumo medio" },
         g2: { v: 540, d: 0, arc: 58, unit: "km de autonomía", label: "Alcance estimado" },
         bars: [16, 82], barLabels: ["Acelerador", "Coasting"],
-        desc: "El protagonista: suelta el acelerador y el carro planea en coasting, gastando lo mínimo. Hasta 20% menos consumo y unos 540 km por tanqueada."
+        desc: "Prioriza el ahorro: el acelerador responde más suave y, al soltarlo, el carro aprovecha el impulso para rodar sin gastar combustible (coasting). Así rinde hasta 20% más y llega a unos 540 km por tanqueada."
       }
     };
     const gaugeResp = document.getElementById("gaugeResp");
@@ -1484,6 +1503,7 @@
     const tabs = Array.from(modesSection.querySelectorAll(".mode-tab"));
 
     const ecoChips = document.getElementById("ecoChips");
+    const ecoNote = document.getElementById("ecoNote");
 
     const tween = (el, from, to, decimals) => {
       if (reduceMotion) { el.textContent = to.toFixed(decimals).replace(".", ","); return; }
@@ -1540,6 +1560,7 @@
       modeDesc.textContent = m.desc;
       modeStatus.textContent = m.label + " · Activo";
       ecoChips.classList.toggle("is-hidden", name !== "eco");
+      ecoNote.classList.toggle("is-hidden", name !== "eco");
       tabs.forEach(b => b.classList.toggle("active", b.dataset.mode === name));
     };
     tabs.forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
