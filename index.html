@@ -6,7 +6,7 @@
 <title>BMW X3 xDrive30i 2019 — 76.000 km · Bogotá</title>
 <meta name="description" content="BMW X3 xDrive30i modelo 2019, 76.000 km. Motor TwinPower Turbo de 252 hp, tracción integral xDrive, techo panorámico e interior en cuero. Agenda tu visita en Bogotá.">
 <link rel="preload" as="image" href="img/hero-bg.jpg">
-<link rel="preload" as="image" href="img/hero-car.webp" imagesrcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" imagesizes="(max-width: 760px) 96vw, 62vw">
+<link rel="preload" as="image" href="img/hero-car.webp" imagesrcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" imagesizes="(max-width: 760px) 170vw, 62vw">
 <style>
   :root {
     --bg: #0a0b0e;
@@ -224,13 +224,14 @@
     will-change: transform, opacity;
   }
   .hero-title { margin: 0 0 auto; padding-left: clamp(0rem, 3vw, 2.5rem); max-width: 34rem; }
-  .hero-content > * {
+  .hero-content > .hero-title,
+  .hero-content > .hero-bottombar {
     opacity: 0;
     transform: translateY(28px);
     animation: heroRise .9s cubic-bezier(.2,.6,.2,1) forwards;
   }
-  .hero-content > *:nth-child(1) { animation-delay: .25s; }
-  .hero-content > *:nth-child(2) { animation-delay: .38s; }
+  .hero-content > .hero-title { animation-delay: .25s; }
+  .hero-content > .hero-bottombar { animation-delay: .55s; }
   @keyframes heroRise {
     to { opacity: 1; transform: none; }
   }
@@ -464,6 +465,16 @@
   .eco-chips {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem;
     margin-top: clamp(1.6rem, 4vw, 2.4rem);
+    max-height: 200px;
+    opacity: 1;
+    transition: opacity .35s ease, max-height .45s ease, margin-top .45s ease;
+  }
+  .eco-chips.is-hidden {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
   @media (max-width: 520px) { .eco-chips { grid-template-columns: 1fr; } }
   .chip {
@@ -900,24 +911,40 @@
     .hero {
       margin: calc(60px + .9rem) .9rem 0;
       height: auto;
-      min-height: max(calc(100svh - 60px - 1.8rem), 640px);
+      min-height: 0;
       border-radius: 20px;
       align-items: stretch;
     }
     .hero-bg { background-position: 62% 100%; }
     .hero-dots { display: none; }
-    .hero-car {
-      right: -4%;
-      bottom: 158px;
-      width: 104%;
-    }
-    .hero-content { height: auto; padding: 1.9rem 1.15rem 1.15rem; }
-    .hero-title { padding-left: 0; max-width: none; }
+    .hero-content { height: auto; padding: 1.7rem 1.15rem 1.15rem; }
+    .hero-title { margin: 0; padding-left: 0; max-width: none; }
     .hero-eyebrow { font-size: .6rem; letter-spacing: .18em; margin-bottom: .9rem; }
     .hero-content h1 { font-size: clamp(2.8rem, 14vw, 3.5rem); }
     .hero-content .sub { font-size: .92rem; margin-top: .7rem; }
     .hero-actions { margin-top: 1.3rem; gap: .7rem; }
     .hero-actions .btn { flex: 1 1 0; padding: .95rem .4rem; font-size: .72rem; letter-spacing: .06em; }
+
+    /* El auto pasa a flujo normal: se apoya solo entre el título y las cifras, sin huecos */
+    .hero-car {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+      z-index: 1;
+      display: block;
+      width: 170%;
+      max-width: none;
+      margin: .6rem 0 -.5rem -35%;
+      filter: drop-shadow(0 24px 22px rgba(0,0,0,.55));
+      animation: carInUp 1s cubic-bezier(.2,.6,.2,1) .35s both;
+    }
+    @keyframes carInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hero-bottombar { position: relative; z-index: 2; margin-top: .3rem; }
     .hero-statcard { padding: 1rem .6rem; gap: .4rem; }
     .hero-statcard .v { font-size: 1.55rem; }
     .hero-statcard .k { font-size: .66rem; margin-top: .3rem; }
@@ -1027,7 +1054,8 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-bg, .hero-car, .hero-content > * { animation: none !important; }
     .g-val, .bar span { transition: none; }
-    .hero-content > *, .hero-car { opacity: 1; transform: none; }
+    .hero-content > *, .hero-car,
+    .hero-content > .hero-title, .hero-content > .hero-bottombar { opacity: 1 !important; transform: none !important; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .split-media img { height: 100%; }
     html { scroll-behavior: auto; }
@@ -1054,7 +1082,6 @@
 
 <section class="hero" id="inicio" style="padding:0">
   <div class="hero-bg" role="img" aria-label="Calle urbana de noche con asfalto mojado"></div>
-  <img class="hero-car" src="img/hero-car.webp" srcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" sizes="(max-width: 760px) 96vw, 62vw" alt="BMW X3 xDrive30i blanca, vista frontal tres cuartos" fetchpriority="high">
   <nav class="hero-dots" aria-label="Ir a sección">
     <a href="#inicio" aria-label="Inicio"></a>
     <a href="#diseno" aria-label="Diseño"></a>
@@ -1072,6 +1099,7 @@
         <a class="btn btn-ghost" href="#galeria">Ver galería</a>
       </div>
     </div>
+    <img class="hero-car" src="img/hero-car.webp" srcset="img/hero-car-sm.webp 760w, img/hero-car.webp 1500w" sizes="(max-width: 760px) 170vw, 62vw" alt="BMW X3 xDrive30i blanca, vista frontal tres cuartos" fetchpriority="high">
     <div class="hero-bottombar">
       <div class="hero-statcard">
         <div class="spec"><div class="v">252</div><div class="k">hp</div></div>
@@ -1225,7 +1253,7 @@
 
       <p class="mode-desc" id="modeDesc">El protagonista: suelta el acelerador y el carro planea en coasting, gastando lo mínimo. Hasta 20% menos consumo y unos 540 km por tanqueada.</p>
 
-      <div class="eco-chips">
+      <div class="eco-chips" id="ecoChips">
         <div class="chip"><b>Hasta 20%</b><span>Menos consumo en ECO PRO</span></div>
         <div class="chip"><b>Coasting</b><span>Rodaje libre en carretera</span></div>
         <div class="chip"><b>≈ 540 km</b><span>Autonomía por tanqueada</span></div>
@@ -1267,7 +1295,7 @@
   <div class="wrap">
     <div class="gallery-head reveal">
       <p class="eyebrow">Galería</p>
-      <h2>Véala desde todos los ángulos.</h2>
+      <h2>Apréciala desde todos los ángulos.</h2>
     </div>
     <div class="gallery-grid" id="galleryGrid">
       <button class="g-item wide reveal" type="button"><img src="img/front-low.jpg" alt="Frontal tres cuartos en ángulo bajo, con arborización de fondo" loading="lazy"><span class="g-tag">Exterior</span></button>
@@ -1455,8 +1483,9 @@
     const modeStatus = document.getElementById("modeStatus");
     const tabs = Array.from(modesSection.querySelectorAll(".mode-tab"));
 
-    const tween = (el, to, decimals) => {
-      const from = parseFloat((el.textContent || "0").replace(",", ".")) || 0;
+    const ecoChips = document.getElementById("ecoChips");
+
+    const tween = (el, from, to, decimals) => {
       if (reduceMotion) { el.textContent = to.toFixed(decimals).replace(".", ","); return; }
       const dur = 900;
       const t0 = performance.now();
@@ -1469,24 +1498,48 @@
       requestAnimationFrame(tick);
     };
 
+    // Reinicia el trazo a 0 (sin transición) y lo suelta para que se "llene" desde cero
+    const fillArc = (el, arc) => {
+      if (reduceMotion) { el.style.strokeDasharray = arc + " 100"; return; }
+      el.style.transition = "none";
+      el.style.strokeDasharray = "0 100";
+      el.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        el.style.transition = "";
+        el.style.strokeDasharray = arc + " 100";
+      });
+    };
+    // Reinicia la barra a 0% y la suelta para que suba llenándose
+    const fillBar = (el, pct) => {
+      if (reduceMotion) { el.style.height = pct + "%"; return; }
+      el.style.transition = "none";
+      el.style.height = "0%";
+      el.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        el.style.transition = "";
+        el.style.height = pct + "%";
+      });
+    };
+
     const setMode = (name) => {
       const m = MODES[name];
       modesSection.style.setProperty("--mcol", m.color);
       modesSection.style.setProperty("--mglow", m.glow);
-      gaugeResp.style.strokeDasharray = m.g1.arc + " 100";
-      gaugeRpm.style.strokeDasharray = m.g2.arc + " 100";
-      tween(numResp, m.g1.v, m.g1.d);
-      tween(numRpm, m.g2.v, m.g2.d);
+      fillArc(gaugeResp, m.g1.arc);
+      fillArc(gaugeRpm, m.g2.arc);
+      tween(numResp, 0, m.g1.v, m.g1.d);
+      tween(numRpm, 0, m.g2.v, m.g2.d);
       unitG1.textContent = m.g1.unit;
       unitG2.textContent = m.g2.unit;
       labelG1.textContent = m.g1.label;
       labelG2.textContent = m.g2.label;
-      barAcc.style.height = m.bars[0] + "%";
-      barDir.style.height = m.bars[1] + "%";
+      fillBar(barAcc, m.bars[0]);
+      fillBar(barDir, m.bars[1]);
       barKA.textContent = m.barLabels[0];
       barKB.textContent = m.barLabels[1];
       modeDesc.textContent = m.desc;
       modeStatus.textContent = m.label + " · Activo";
+      ecoChips.classList.toggle("is-hidden", name !== "eco");
       tabs.forEach(b => b.classList.toggle("active", b.dataset.mode === name));
     };
     tabs.forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
