@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMW X3 xDrive30i 2019 — 76.000 km · Bogotá</title>
+<meta name="description" content="BMW X3 xDrive30i modelo 2019, 76.000 km. Motor TwinPower Turbo de 252 hp, tracción integral xDrive, techo panorámico e interior en cuero. Agenda tu visita en Bogotá.">
+<link rel="preload" as="image" href="img/hero.jpg">
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --bg-2: #101218;
+    --bg-3: #15181f;
+    --ink: #f2f3f6;
+    --soft: #c9cdd4;
+    --muted: #8a9099;
+    --line: rgba(255,255,255,.09);
+    --line-strong: rgba(255,255,255,.18);
+    --accent: #2ea8e0;
+    --bg-light: #f7f6f3;
+    --ink-light: #121316;
+    --soft-light: #45484e;
+    --muted-light: #767a82;
+    --line-light: rgba(10,11,14,.1);
+    --line-light-strong: rgba(10,11,14,.2);
+    --font: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --pad: clamp(1.25rem, 5vw, 4rem);
+    --radius: 2px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: #04121c; }
+
+  /* ---------- Type ---------- */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1, h2, h3 { font-weight: 700; line-height: 1.08; letter-spacing: -.02em; }
+
+  /* ---------- Scroll progress ---------- */
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 120;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 var(--pad);
+    height: 72px;
+    color: #fff;
+    transition: background .35s ease, box-shadow .35s ease, height .35s ease;
+  }
+  .site-header.solid {
+    background: rgba(10,11,14,.82);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 var(--line);
+    height: 60px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: .6rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
+  }
+  .brand .model { font-weight: 300; letter-spacing: .12em; color: var(--soft); }
+  .nav-links {
+    display: none;
+    gap: 2.1rem;
+    font-size: .82rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+  }
+  .nav-links a {
+    position: relative;
+    padding: .3rem 0;
+    opacity: .78;
+    transition: opacity .25s;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .35s cubic-bezier(.2,.6,.2,1);
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .header-cta {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .62rem 1.2rem;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition: background .25s, color .25s, border-color .25s;
+  }
+  .header-cta:hover { background: #fff; border-color: #fff; color: #0a0b0e; }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  @media (max-width: 520px) {
+    .brand { font-size: .88rem; white-space: nowrap; gap: .45rem; }
+    .header-cta { font-size: .68rem; padding: .5rem .8rem; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    background: url("img/hero.jpg") center 62% / cover no-repeat;
+    animation: heroZoom 16s cubic-bezier(.2,.5,.3,1) forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.14); }
+    to   { transform: scale(1.0); }
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, var(--bg) 0%, rgba(10,11,14,.55) 26%, rgba(10,11,14,.05) 55%, rgba(10,11,14,.42) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 var(--pad) clamp(2.5rem, 7vh, 5rem);
+    will-change: transform, opacity;
+  }
+  .hero-content > * {
+    opacity: 0;
+    transform: translateY(28px);
+    animation: heroRise .9s cubic-bezier(.2,.6,.2,1) forwards;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: .25s; }
+  .hero-content > *:nth-child(2) { animation-delay: .38s; }
+  .hero-content > *:nth-child(3) { animation-delay: .52s; }
+  .hero-content > *:nth-child(4) { animation-delay: .68s; }
+  .hero-content > *:nth-child(5) { animation-delay: .84s; }
+  @keyframes heroRise {
+    to { opacity: 1; transform: none; }
+  }
+  .hero-content .eyebrow { color: rgba(255,255,255,.78); margin-bottom: 1rem; }
+  .hero-content h1 {
+    font-size: clamp(2.8rem, 9vw, 6.5rem);
+    letter-spacing: -.025em;
+  }
+  .hero-content .sub {
+    margin-top: .5rem;
+    font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+    font-weight: 300;
+    letter-spacing: .02em;
+    color: rgba(255,255,255,.9);
+  }
+  .hero-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem 2.6rem;
+    margin-top: 1.9rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.28);
+    max-width: 720px;
+  }
+  .hero-specs .spec .v { font-size: 1.28rem; font-weight: 700; }
+  .hero-specs .spec .k {
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    margin-top: .1rem;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: .95rem 1.9rem;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background .3s, color .3s, border-color .3s, transform .18s, box-shadow .3s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -130%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255,255,255,.22), transparent);
+    transform: skewX(-20deg);
+    transition: left .6s ease;
+    pointer-events: none;
+  }
+  .btn:hover::before { left: 160%; }
+  .btn-primary { background: #fff; color: #0a0b0e; }
+  .btn-primary:hover { background: var(--accent); color: #fff; box-shadow: 0 12px 30px rgba(0,160,224,.28); }
+  .btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+  .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .btn-whatsapp { background: #1f9d55; color: #fff; }
+  .btn-whatsapp:hover { background: #23b061; box-shadow: 0 12px 30px rgba(31,157,85,.3); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 1px;
+    height: 44px;
+    background: rgba(255,255,255,.35);
+    overflow: hidden;
+  }
+  .scroll-hint::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--accent);
+    animation: scrollHint 2s ease-in-out infinite;
+  }
+  @keyframes scrollHint { 0% { top: -50%; } 100% { top: 110%; } }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(4rem, 10vw, 7.5rem) var(--pad); }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  .wrap-narrow { max-width: 880px; margin: 0 auto; }
+  .panel { background: var(--bg-2); }
+
+  /* ---------- Light sections (alternancia blanco/negro) ---------- */
+  .light { background: var(--bg-light); color: var(--ink-light); }
+  .light .eyebrow { color: var(--muted-light); }
+  .light .split-copy p { color: var(--soft-light); }
+  .light .split-copy li { color: var(--soft-light); border-bottom-color: var(--line-light); }
+  .light .split-media { box-shadow: 0 24px 60px rgba(10,11,14,.14); }
+  .light .spec-table th, .light .spec-table td { border-bottom-color: var(--line-light); }
+  .light .spec-table tbody tr:hover { background: rgba(10,11,14,.035); }
+  .light .spec-table th { color: var(--muted-light); }
+  .light .spec-table td { color: var(--ink-light); }
+  .light .spec-note { color: var(--muted-light); }
+  .light .contact p { color: var(--muted-light); }
+  .light .contact-meta { color: var(--soft-light); }
+  .light .btn-ghost { border-color: rgba(10,11,14,.3); color: var(--ink-light); }
+  .light .btn-ghost:hover { border-color: var(--ink-light); background: rgba(10,11,14,.06); }
+  .contact.light { background: var(--bg-light); color: var(--ink-light); }
+
+  .statement { text-align: center; }
+  .statement .eyebrow { justify-content: center; margin-bottom: 1.2rem; }
+  .statement h2 {
+    font-size: clamp(1.7rem, 4.4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.22;
+  }
+  .statement h2 em { font-style: normal; color: var(--accent); }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    padding-bottom: clamp(2.5rem, 6vw, 4rem);
+    background:
+      radial-gradient(60% 120% at 50% 0%, rgba(0,160,224,.06), transparent 70%);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  @media (min-width: 760px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat .num {
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .num small {
+    font-size: .45em;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0;
+    margin-left: .18em;
+  }
+  .stat .label {
+    margin-top: .55rem;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- Splits ---------- */
+  .split {
+    display: grid;
+    gap: clamp(1.8rem, 4vw, 4.5rem);
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .split { grid-template-columns: 1.15fr 1fr; }
+    .split.flip .split-media { order: 2; }
+  }
+  .split + .split { margin-top: clamp(4rem, 9vw, 7rem); }
+  .split-media {
+    overflow: hidden;
+    border-radius: var(--radius);
+    aspect-ratio: 3 / 2;
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  }
+  .split-media img {
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+    will-change: transform;
+  }
+  .split-copy .eyebrow { margin-bottom: 1rem; }
+  .split-copy h3 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); margin-bottom: 1.1rem; }
+  .split-copy p { color: var(--soft); max-width: 46ch; }
+  .split-copy ul { margin-top: 1.4rem; list-style: none; }
+  .split-copy li {
+    padding: .68rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: .95rem;
+    color: var(--soft);
+    display: flex;
+    align-items: baseline;
+    gap: .8rem;
+  }
+  .split-copy li::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 14px;
+    height: 2px;
+    background: var(--accent);
+    position: relative;
+    top: -4px;
+  }
+
+  /* ---------- Spec table ---------- */
+  .spec-table { width: 100%; border-collapse: collapse; margin-top: 2.6rem; }
+  .spec-table th, .spec-table td {
+    text-align: left;
+    padding: 1rem .4rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .spec-table tr { transition: background .25s; }
+  .spec-table tbody tr:hover { background: rgba(255,255,255,.03); }
+  .spec-table th {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 42%;
+  }
+  .spec-table td { font-size: .98rem; font-weight: 500; color: var(--ink); }
+  .spec-table td.hl { color: var(--accent); font-weight: 700; }
+  .spec-note { margin-top: 1.4rem; font-size: .8rem; color: var(--muted); }
+
+  /* ---------- Gallery ---------- */
+  .gallery-head { margin-bottom: 2.6rem; }
+  .gallery-head h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-top: .9rem; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: 10px;
+  }
+  @media (min-width: 760px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+  .g-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    cursor: zoom-in;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-3);
+    border: 0;
+    padding: 0;
+  }
+  .g-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .9s cubic-bezier(.2,.6,.2,1), filter .5s;
+  }
+  .g-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6,7,9,.55), transparent 45%);
+    opacity: 0;
+    transition: opacity .45s;
+    pointer-events: none;
+  }
+  .g-item .g-tag {
+    position: absolute;
+    left: .9rem;
+    bottom: .7rem;
+    z-index: 2;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .4s, transform .4s;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+  .g-item:hover img, .g-item:focus-visible img { transform: scale(1.06); }
+  .g-item:hover::after, .g-item:focus-visible::after { opacity: 1; }
+  .g-item:hover .g-tag, .g-item:focus-visible .g-tag { opacity: 1; transform: none; }
+  .g-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (min-width: 760px) {
+    .g-item.wide { grid-column: span 2; }
+    .g-item.tall { grid-row: span 2; aspect-ratio: auto; }
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(5,6,8,.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+  }
+  .lightbox.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .35s ease;
+  }
+  .lightbox img {
+    max-width: min(92vw, 1400px);
+    max-height: 84vh;
+    object-fit: contain;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    transform: scale(.96);
+    transition: transform .35s cubic-bezier(.2,.6,.2,1), opacity .22s;
+  }
+  .lightbox.open img { transform: scale(1); }
+  .lightbox img.swapping { opacity: 0; }
+  .lb-btn {
+    position: absolute;
+    background: none;
+    border: 0;
+    color: rgba(255,255,255,.8);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 1rem;
+    font-family: var(--font);
+    transition: color .2s, transform .2s;
+    z-index: 2;
+  }
+  .lb-btn:hover { color: var(--accent); transform: scale(1.1); }
+  .lb-close { top: .8rem; right: 1rem; font-size: 1.6rem; }
+  .lb-prev { left: .6rem; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: .6rem; top: 50%; transform: translateY(-50%); }
+  .lb-prev:hover { transform: translateY(-50%) scale(1.14); }
+  .lb-next:hover { transform: translateY(-50%) scale(1.14); }
+  .lb-count {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,.6);
+    font-size: .8rem;
+    letter-spacing: .18em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    position: relative;
+    background: var(--bg-2);
+    text-align: center;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, 70vw);
+    height: 3px;
+    background: var(--accent);
+  }
+  .contact .eyebrow { justify-content: center; }
+  .contact h2 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-top: 1rem;
+    letter-spacing: -.025em;
+  }
+  .contact p { color: var(--muted); max-width: 52ch; margin: 1.2rem auto 0; }
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+  .contact-meta {
+    margin-top: 2.6rem;
+    font-size: .95rem;
+    color: var(--soft);
+    letter-spacing: .08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--bg);
+    color: var(--muted);
+    padding: 2rem var(--pad) 2.6rem;
+    border-top: 1px solid var(--line);
+    font-size: .74rem;
+    line-height: 1.7;
+  }
+  footer .wrap { display: flex; flex-direction: column; gap: .6rem; }
+
+  /* ---------- Mobile CTA bar ---------- */
+  .mobile-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 90;
+    display: none;
+    gap: .6rem;
+    padding: .65rem var(--pad) calc(.65rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(10,11,14,.88);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    transform: translateY(110%);
+    transition: transform .45s cubic-bezier(.2,.6,.2,1);
+  }
+  .mobile-cta.show { transform: none; }
+  .mobile-cta .btn { flex: 1; padding: .8rem 1rem; font-size: .76rem; }
+
+  /* ---------- Mobile refinements ---------- */
+  @media (max-width: 760px) {
+    .mobile-cta { display: flex; }
+    footer { padding-bottom: 7.5rem; }
+  }
+  @media (max-width: 640px) {
+    .hero-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem 1rem;
+    }
+    .spec-table th, .spec-table td { display: block; width: 100%; }
+    .spec-table th { padding: .95rem .4rem 0; border-bottom: 0; }
+    .spec-table td { padding: .1rem .4rem .95rem; }
+    .lightbox img { max-width: 96vw; max-height: 74vh; }
+    .lb-prev, .lb-next {
+      font-size: 1.5rem;
+      width: 46px; height: 46px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .lb-prev { left: .8rem; }
+    .lb-next { right: .8rem; }
+    .lb-close {
+      width: 46px; height: 46px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+  }
+  @media (max-width: 520px) {
+    .hero-actions, .contact-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn, .contact-actions .btn { width: 100%; }
+    .scroll-hint { display: none; }
+  }
+  @media (max-width: 340px) {
+    .brand .model { display: none; }
+  }
+  /* Touch: mostrar etiquetas de galería sin hover */
+  @media (hover: none) {
+    .g-item .g-tag { opacity: 1; transform: none; }
+    .g-item::after { opacity: .75; }
+  }
+
+  /* ---------- Reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .85s ease, transform .85s cubic-bezier(.2,.6,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media, .hero-content > *, .scroll-hint::after { animation: none !important; }
+    .hero-content > * { opacity: 1; transform: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .split-media img { height: 100%; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#inicio">
+    BMW <span class="model">X3 xDrive30i</span>
+  </a>
+  <nav class="nav-links" aria-label="Secciones">
+    <a href="#diseno">Diseño</a>
+    <a href="#interior">Interior</a>
+    <a href="#especificaciones">Especificaciones</a>
+    <a href="#galeria">Galería</a>
+  </nav>
+  <a class="header-cta" href="#contacto">Agendar visita</a>
+</header>
+
+<section class="hero" id="inicio" style="padding:0">
+  <div class="hero-media" id="heroMedia" role="img" aria-label="BMW X3 xDrive30i blanca, vista frontal tres cuartos en Bogotá"></div>
+  <div class="hero-content" id="heroContent">
+    <p class="eyebrow">Modelo 2019 · 76.000 km · Bogotá D.C.</p>
+    <h1>BMW X3</h1>
+    <p class="sub">xDrive30i · TwinPower Turbo · Tracción integral</p>
+    <div class="hero-specs">
+      <div class="spec"><div class="v">252 hp</div><div class="k">Potencia</div></div>
+      <div class="spec"><div class="v">350 Nm</div><div class="k">Torque</div></div>
+      <div class="spec"><div class="v">6,3 s</div><div class="k">0–100 km/h</div></div>
+      <div class="spec"><div class="v">xDrive</div><div class="k">Tracción</div></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#contacto">Agendar visita</a>
+      <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
+
+<section class="statement">
+  <div class="wrap-narrow reveal">
+    <p class="eyebrow">El Sport Activity Vehicle</p>
+    <h2>La presencia de un SUV.<br>El alma de un deportivo.<br><em>Lista para su próximo propietario.</em></h2>
+  </div>
+</section>
+
+<section class="stats" aria-label="Cifras principales">
+  <div class="stats-grid">
+    <div class="stat reveal"><div class="num"><span data-count="252">0</span><small>hp</small></div><div class="label">Potencia</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="350">0</span><small>Nm</small></div><div class="label">Torque</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="6.3" data-decimals="1">0</span><small>s</small></div><div class="label">0–100 km/h</div></div>
+    <div class="stat reveal"><div class="num"><span data-count="76">0</span><small>mil km</small></div><div class="label">Recorrido</div></div>
+  </div>
+</section>
+
+<section id="diseno" class="light">
+  <div class="split">
+    <div class="split-media reveal" data-parallax><img src="img/side.jpg" alt="Perfil lateral de la BMW X3 blanca con rines bicolor" loading="lazy"></div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Diseño exterior</p>
+      <h3>Proporciones que imponen. Líneas que fluyen.</h3>
+      <p>Silueta atlética en blanco alpino con contrastes en negro, parrilla doble riñón cromada y firma lumínica LED. Una presencia inconfundible desde cualquier ángulo.</p>
+      <ul>
+        <li>Faros full LED con luces diurnas hexagonales</li>
+        <li>Rines de aleación bicolor de doble radio</li>
+        <li>Barras de techo y molduras satinadas</li>
+      </ul>
+    </div>
+  </div>
+  <div class="split flip">
+    <div class="split-media reveal" data-parallax><img src="img/rear34.jpg" alt="Vista trasera tres cuartos de la BMW X3 con stops LED" loading="lazy"></div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Carácter deportivo</p>
+      <h3>Cada detalle, pensado para el camino.</h3>
+      <p>Stops LED tridimensionales, doble salida de escape cromada y protección inferior estilo off-road. Deportividad y elegancia en el mismo trazo.</p>
+      <ul>
+        <li>Stops LED con diseño tridimensional</li>
+        <li>Doble salida de escape en acero</li>
+        <li>Sensores de parqueo delanteros y traseros</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="interior">
+  <div class="split">
+    <div class="split-media reveal" data-parallax><img src="img/cockpit.jpg" alt="Cabina de la BMW X3: volante multifuncional, iDrive y molduras en madera" loading="lazy"></div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Interior</p>
+      <h3>Un cockpit orientado al conductor.</h3>
+      <p>Cuero negro, molduras en madera fina e iluminación ambiental. Tecnología BMW iDrive con pantalla central, modos de manejo y encendido por botón.</p>
+      <ul>
+        <li>Tapicería en cuero negro</li>
+        <li>Sistema iDrive con pantalla central</li>
+        <li>Modos de manejo Comfort · Sport · Eco Pro</li>
+        <li>Climatización automática</li>
+      </ul>
+    </div>
+  </div>
+  <div class="split flip">
+    <div class="split-media reveal" data-parallax><img src="img/seats.jpg" alt="Asientos traseros en cuero negro bajo el techo panorámico" loading="lazy"></div>
+    <div class="split-copy reveal">
+      <p class="eyebrow">Espacio y luz</p>
+      <h3>Techo panorámico. Amplitud real.</h3>
+      <p>Segunda fila con espacio generoso, salidas de aire dedicadas e iluminación ambiental perimetral. El techo corredizo panorámico llena la cabina de luz natural.</p>
+      <ul>
+        <li>Techo corredizo panorámico eléctrico</li>
+        <li>Iluminación ambiental en puertas y tablero</li>
+        <li>Salidas de climatización para la segunda fila</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="especificaciones" class="light">
+  <div class="wrap-narrow">
+    <div class="reveal">
+      <p class="eyebrow">Ficha técnica</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.8rem); margin-top:.9rem;">Especificaciones</h2>
+    </div>
+    <table class="spec-table reveal">
+      <tbody>
+        <tr><th scope="row">Modelo</th><td>BMW X3 xDrive30i (G01)</td></tr>
+        <tr><th scope="row">Año / Modelo</th><td class="hl">2019</td></tr>
+        <tr><th scope="row">Kilometraje</th><td class="hl">76.000 km</td></tr>
+        <tr><th scope="row">Motor</th><td>2.0 L TwinPower Turbo, 4 cilindros en línea</td></tr>
+        <tr><th scope="row">Potencia</th><td>252 hp @ 5.200 rpm</td></tr>
+        <tr><th scope="row">Torque</th><td>350 Nm @ 1.450 rpm</td></tr>
+        <tr><th scope="row">Transmisión</th><td>Automática Steptronic de 8 velocidades</td></tr>
+        <tr><th scope="row">Tracción</th><td>Integral inteligente BMW xDrive</td></tr>
+        <tr><th scope="row">0–100 km/h</th><td>6,3 segundos</td></tr>
+        <tr><th scope="row">Color exterior</th><td>Blanco alpino</td></tr>
+        <tr><th scope="row">Interior</th><td>Cuero negro con molduras en madera</td></tr>
+        <tr><th scope="row">Precio</th><td>Consultar</td></tr>
+        <tr><th scope="row">Ubicación</th><td>Bogotá D.C., Colombia</td></tr>
+      </tbody>
+    </table>
+    <p class="spec-note reveal">Cifras de potencia, torque y aceleración corresponden a la especificación de fábrica del BMW X3 xDrive30i (G01). Documentación al día, disponible para revisión en visita.</p>
+  </div>
+</section>
+
+<section class="panel" id="galeria">
+  <div class="wrap">
+    <div class="gallery-head reveal">
+      <p class="eyebrow">Galería</p>
+      <h2>Véala desde todos los ángulos.</h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <button class="g-item wide reveal" type="button"><img src="img/front-low.jpg" alt="Frontal tres cuartos en ángulo bajo" loading="lazy"><span class="g-tag">Exterior</span></button>
+      <button class="g-item reveal" type="button"><img src="img/front.jpg" alt="Vista frontal con parrilla doble riñón" loading="lazy"><span class="g-tag">Frontal</span></button>
+      <button class="g-item tall reveal" type="button"><img src="img/portrait.jpg" alt="Detalle frontal en formato vertical" loading="lazy"><span class="g-tag">Detalle</span></button>
+      <button class="g-item reveal" type="button"><img src="img/side-green.jpg" alt="Perfil lateral frente a edificio" loading="lazy"><span class="g-tag">Perfil</span></button>
+      <button class="g-item reveal" type="button"><img src="img/rear.jpg" alt="Vista trasera con doble escape" loading="lazy"><span class="g-tag">Trasera</span></button>
+      <button class="g-item reveal" type="button"><img src="img/cockpit.jpg" alt="Puesto de conducción" loading="lazy"><span class="g-tag">Interior</span></button>
+      <button class="g-item wide reveal" type="button"><img src="img/rear34-sun.jpg" alt="Trasera tres cuartos a plena luz" loading="lazy"><span class="g-tag">Exterior</span></button>
+      <button class="g-item reveal" type="button"><img src="img/seats.jpg" alt="Asientos traseros y techo panorámico" loading="lazy"><span class="g-tag">Interior</span></button>
+      <button class="g-item reveal" type="button"><img src="img/hero.jpg" alt="Frontal tres cuartos en entorno urbano" loading="lazy"><span class="g-tag">Exterior</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="contact light" id="contacto">
+  <div class="wrap-narrow reveal">
+    <p class="eyebrow">Contacto</p>
+    <h2>Agende su visita.<br>Conózcala en persona.</h2>
+    <p>Vehículo disponible para ver y probar en Bogotá D.C. Documentación al día y revisión en el concesionario o taller de su confianza.</p>
+    <div class="contact-actions">
+      <a class="btn btn-whatsapp" id="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-ghost" id="telLink" href="#">Llamar</a>
+    </div>
+    <p class="contact-meta" id="contactMeta"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>BMW X3 xDrive30i 2019 · 76.000 km · Venta directa de particular · Bogotá D.C.</span>
+    <span>BMW, X3, xDrive y M son marcas registradas de BMW AG. Este sitio es una publicación independiente del propietario del vehículo y no está afiliado a BMW AG ni a sus concesionarios.</span>
+  </div>
+</footer>
+
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn btn-whatsapp" id="waLinkBar" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="btn btn-ghost" id="telLinkBar" href="#">Llamar</a>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería ampliada">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <img id="lbImg" src="" alt="Fotografía ampliada del vehículo">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Siguiente">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<script>
+  // ============================================================
+  // DATOS DE CONTACTO
+  // ============================================================
+  const CONTACTO = {
+    telefono: "+57 310 301 2129",
+    whatsapp: "573103012129",
+    mensaje: "Hola, vi el landing de la BMW X3 xDrive30i 2019 y me gustaría agendar una visita."
+  };
+  // ============================================================
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const waHref = "https://wa.me/" + CONTACTO.whatsapp + "?text=" + encodeURIComponent(CONTACTO.mensaje);
+  const telHref = "tel:" + CONTACTO.telefono.replace(/\s/g, "");
+  document.getElementById("waLink").href = waHref;
+  document.getElementById("telLink").href = telHref;
+  document.getElementById("waLinkBar").href = waHref;
+  document.getElementById("telLinkBar").href = telHref;
+  document.getElementById("contactMeta").textContent = CONTACTO.telefono + " · Bogotá D.C.";
+
+  // Header sólido + barra de progreso + parallax del hero
+  const header = document.getElementById("siteHeader");
+  const progress = document.getElementById("progress");
+  const heroContent = document.getElementById("heroContent");
+  const mobileCta = document.getElementById("mobileCta");
+  const docEl = document.documentElement;
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const vh = window.innerHeight;
+
+      header.classList.toggle("solid", y > vh * 0.72);
+      mobileCta.classList.toggle("show", y > vh * 0.85);
+
+      const max = docEl.scrollHeight - vh;
+      progress.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
+
+      if (!reduceMotion && y < vh) {
+        heroContent.style.transform = "translateY(" + y * 0.18 + "px)";
+        heroContent.style.opacity = Math.max(0, 1 - y / (vh * 0.75));
+      }
+
+      if (!reduceMotion) {
+        for (const box of parallaxBoxes) {
+          const r = box.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) continue;
+          const p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2); // -1..1
+          box.firstElementChild.style.transform = "translateY(" + (-p * 8 - 8) + "%)";
+        }
+      }
+      ticking = false;
+    });
+  };
+  const parallaxBoxes = Array.from(document.querySelectorAll("[data-parallax]"));
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  onScroll();
+
+  // Reveals con escalonado por grupo
+  const groups = new Map();
+  document.querySelectorAll(".reveal").forEach(el => {
+    const parent = el.parentElement;
+    const i = (groups.get(parent) || 0);
+    groups.set(parent, i + 1);
+    el.style.setProperty("--d", Math.min(i * 90, 450) + "ms");
+  });
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.16 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // Contadores animados
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || "0", 10);
+    const dur = 1500;
+    const t0 = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals).replace(".", ",");
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const ioCount = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { animateCount(e.target); ioCount.unobserve(e.target); }
+    }
+  }, { threshold: 0.6 });
+  document.querySelectorAll("[data-count]").forEach(el => ioCount.observe(el));
+
+  // Lightbox con transiciones y gestos
+  const items = Array.from(document.querySelectorAll("#galleryGrid .g-item img"));
+  const lightbox = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbCount = document.getElementById("lbCount");
+  let idx = 0;
+  let lastFocus = null;
+
+  const setImage = (i) => {
+    idx = i;
+    lbImg.src = items[idx].src;
+    lbImg.alt = items[idx].alt;
+    lbCount.textContent = (idx + 1) + " / " + items.length;
+  };
+  const openLb = (i) => {
+    lastFocus = document.activeElement;
+    setImage(i);
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  };
+  const closeLb = () => {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  };
+  const step = (d) => {
+    const next = (idx + d + items.length) % items.length;
+    if (reduceMotion) { setImage(next); return; }
+    lbImg.classList.add("swapping");
+    setTimeout(() => {
+      setImage(next);
+      if (lbImg.complete) lbImg.classList.remove("swapping");
+      else lbImg.onload = () => { lbImg.classList.remove("swapping"); lbImg.onload = null; };
+    }, 180);
+  };
+
+  items.forEach((img, i) => img.closest(".g-item").addEventListener("click", () => openLb(i)));
+  document.getElementById("lbClose").addEventListener("click", closeLb);
+  document.getElementById("lbPrev").addEventListener("click", () => step(-1));
+  document.getElementById("lbNext").addEventListener("click", () => step(1));
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
+  });
+
+  // Swipe en móvil
+  let touchX = null;
+  lightbox.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 45) step(dx > 0 ? -1 : 1);
+    touchX = null;
+  }, { passive: true });
+</script>
+</body>
+</html>
