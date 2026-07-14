@@ -1010,80 +1010,170 @@
   .mobile-cta.show { transform: none; }
   .mobile-cta .btn { flex: 1; padding: .8rem 1rem; font-size: .76rem; }
 
-  /* ---------- Hero en mobile: foto completa + texto integrado sobre el degradado ---------- */
-  .hero-photo-mobile-wrap { display: none; }
-  .hero-photo-mobile { width: 100%; height: auto; display: block; }
+  /* ---------- Hero en mobile: póster nocturno a pantalla completa ---------- */
+  .hero-m { display: none; }
   @media (max-width: 760px) {
-    .site-header {
-      background: rgba(10,11,14,.88) !important;
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 var(--line);
-      height: 60px !important;
-    }
     .hero {
       display: block;
-      margin: calc(60px + .9rem) .9rem 0;
-      height: auto;
-      min-height: 0;
-      border-radius: 20px;
+      margin: 0;
+      height: 100vh;
+      height: 100svh;
+      min-height: 620px;
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
     }
-    .hero-bg, .hero-dots { display: none; }
+    .hero-bg, .hero-dots, .hero-content { display: none; }
     .hero::after { content: none; }
-    .hero-photo-mobile-wrap {
-      display: block;
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-    .hero-photo-mobile {
-      animation: heroZoom 16s cubic-bezier(.2,.5,.3,1) forwards;
-    }
-    .hero-photo-mobile-wrap::after {
-      content: "";
+
+    .hero-m { display: block; position: relative; height: 100%; overflow: hidden; }
+
+    /* Foto: capa de fondo con parallax, fundida arriba y abajo */
+    .hero-m-photo {
       position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 62%;
-      background: linear-gradient(to bottom, transparent, rgba(7,8,11,.85) 68%, var(--bg-2) 100%);
-      pointer-events: none;
+      left: 50%;
+      top: 55%;
+      width: 118%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      will-change: transform;
     }
-    .hero-content {
-      position: relative;
+    .hero-m-photo img {
+      width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+      opacity: 0;
+      transform: scale(1.08);
+      animation: heroMPhotoIn 1.6s cubic-bezier(.2,.6,.2,1) .35s forwards;
+    }
+    @keyframes heroMPhotoIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    .hero-m-shade {
+      position: absolute;
+      inset: 0;
       z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(5,6,9,.88) 0%, rgba(5,6,9,.45) 22%, rgba(5,6,9,0) 42%),
+        linear-gradient(to top, rgba(5,6,9,.92) 0%, rgba(5,6,9,.4) 18%, rgba(5,6,9,0) 38%),
+        radial-gradient(120% 60% at 50% 46%, transparent 55%, rgba(5,6,9,.35) 100%);
+    }
+
+    /* Bloque superior: logo + título + divisor + tagline */
+    .hero-m-head {
+      position: absolute;
+      left: 1.4rem;
+      right: 1.4rem;
+      top: calc(72px + 3svh);
+      z-index: 2;
+      text-align: center;
+      will-change: transform, opacity;
+    }
+    .hero-m-head > * {
+      opacity: 0;
+      transform: translateY(26px);
+      animation: heroRise .9s cubic-bezier(.2,.6,.2,1) forwards;
+    }
+    .hero-m-logo {
+      display: block;
+      width: clamp(54px, 8.5svh, 68px);
       height: auto;
-      display: flex;
-      flex-direction: column;
-      margin-top: -6.4rem;
-      padding: 0 1.15rem 1.4rem;
-      background: linear-gradient(to bottom, transparent, var(--bg-2) 6.4rem);
+      margin: 0 auto;
+      animation-delay: .15s;
+      filter: drop-shadow(0 6px 22px rgba(0,0,0,.55));
     }
-    .hero-titleblock {
-      position: static;
-      padding: 0;
-      text-align: left;
+    .hero-m-title {
+      margin-top: clamp(1rem, 2.6svh, 1.7rem);
+      font-size: clamp(2.3rem, 11.5vw, 2.9rem);
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-indent: .16em;
+      line-height: 1;
+      animation-delay: .3s;
+      text-shadow: 0 2px 26px rgba(0,0,0,.6);
     }
-    .hero-eyebrow { font-size: .6rem; letter-spacing: .18em; margin-bottom: .9rem; }
-    .hero-titleblock h1 { font-size: clamp(2.8rem, 14vw, 3.5rem); }
+    .hero-m-sub {
+      margin-top: .6rem;
+      font-size: clamp(.98rem, 4.6vw, 1.18rem);
+      font-weight: 300;
+      letter-spacing: .1em;
+      text-indent: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+      animation-delay: .42s;
+      text-shadow: 0 1px 14px rgba(0,0,0,.6);
+    }
+    .hero-m-divider {
+      display: block;
+      width: 54px;
+      height: 2px;
+      margin: clamp(.9rem, 2.2svh, 1.4rem) auto;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(46,168,224,.7);
+      animation-delay: .52s;
+    }
+    .hero-m-tag {
+      margin: 0 auto;
+      max-width: 22ch;
+      font-size: clamp(1.02rem, 4.8vw, 1.22rem);
+      font-weight: 300;
+      line-height: 1.45;
+      color: rgba(255,255,255,.9);
+      animation-delay: .62s;
+      text-shadow: 0 1px 16px rgba(0,0,0,.65);
+    }
 
-    .hero-spec-stack {
+    /* CTAs: Agendar visita / Ver galería */
+    .hero-m-actions {
+      position: absolute;
+      left: 1.4rem;
+      right: 1.4rem;
+      bottom: clamp(4.2rem, 9svh, 5.6rem);
+      z-index: 2;
       display: flex;
-      position: static;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: .7rem;
-      margin-top: 1.6rem;
+      gap: .8rem;
+      will-change: transform, opacity;
     }
-    .hero-spec-card { flex: 1 1 calc(50% - .35rem); min-width: 0; }
-    .hero-spec-row .v { font-size: 1.4rem; }
+    .hero-m-actions .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: .95rem .6rem;
+      font-size: .72rem;
+      letter-spacing: .06em;
+      opacity: 0;
+      transform: translateY(22px);
+      animation: heroRise .8s cubic-bezier(.2,.6,.2,1) forwards;
+    }
+    .hero-m-actions .btn:nth-child(1) { animation-delay: .85s; }
+    .hero-m-actions .btn:nth-child(2) { animation-delay: .97s; }
 
-    .hero-bottom-left {
-      position: static;
-      max-width: none;
-      margin-top: 1.6rem;
-      padding-top: 0;
+    /* Chevron de scroll */
+    .hero-m-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 1rem;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: heroMFloat 2.6s ease-in-out 1.8s infinite;
     }
-    .hero-actions { margin-top: 1.3rem; gap: .7rem; }
-    .hero-actions .btn { flex: 1 1 0; padding: .95rem .4rem; font-size: .72rem; letter-spacing: .06em; }
+    .hero-m-scroll svg {
+      width: 26px;
+      height: 26px;
+      color: rgba(255,255,255,.85);
+      opacity: 0;
+      animation: heroMFade .8s ease 1.35s forwards;
+    }
+    @keyframes heroMFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(7px); }
+    }
+    @keyframes heroMFade { to { opacity: 1; } }
   }
 
   /* ---------- Mobile refinements ---------- */
@@ -1188,9 +1278,14 @@
   .reveal.in { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-bg, .hero-photo-mobile, .hero-content > * { animation: none !important; }
+    .hero-bg, .hero-content > * { animation: none !important; }
     .g-val, .bar span { transition: none; }
     .hero-content > * { opacity: 1 !important; transform: none !important; }
+    .hero-m-photo img, .hero-m-head > *, .hero-m-actions .btn, .hero-m-scroll, .hero-m-scroll svg {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
     .reveal { opacity: 1; transform: none; transition: none; }
     .split-media img { height: 100%; }
     html { scroll-behavior: auto; }
@@ -1232,8 +1327,34 @@
 </div>
 
 <section class="hero" id="inicio" style="padding:0">
-  <div class="hero-photo-mobile-wrap">
-    <img class="hero-photo-mobile" src="img/hero-bg.jpg" alt="BMW X3 xDrive30i blanca de frente, luces encendidas, calle mojada de noche" loading="eager" fetchpriority="high">
+  <div class="hero-m">
+    <div class="hero-m-photo" id="heroMPhoto">
+      <img src="img/hero-bg.jpg" alt="BMW X3 xDrive30i blanca de frente, luces encendidas, calle mojada de noche" loading="eager" fetchpriority="high">
+    </div>
+    <div class="hero-m-shade" aria-hidden="true"></div>
+    <div class="hero-m-head" id="heroMHead">
+      <svg class="hero-m-logo" viewBox="0 0 96 96" aria-hidden="true">
+        <circle cx="48" cy="48" r="46" fill="#0c0e12" stroke="rgba(255,255,255,.85)" stroke-width="1.6"/>
+        <path d="M48 19 A29 29 0 0 1 77 48 L48 48 Z" fill="#2167ae"/>
+        <path d="M19 48 A29 29 0 0 0 48 77 L48 48 Z" fill="#2167ae"/>
+        <path d="M48 19 A29 29 0 0 0 19 48 L48 48 Z" fill="#e9edf2"/>
+        <path d="M77 48 A29 29 0 0 1 48 77 L48 48 Z" fill="#e9edf2"/>
+        <circle cx="48" cy="48" r="29" fill="none" stroke="rgba(255,255,255,.35)" stroke-width=".8"/>
+        <defs><path id="bmwArc" d="M 15 48 A 33 33 0 0 1 81 48"/></defs>
+        <text font-size="11" font-weight="600" letter-spacing="2.5" fill="#fff" font-family="inherit"><textPath href="#bmwArc" startOffset="50%" text-anchor="middle">BMW</textPath></text>
+      </svg>
+      <h1 class="hero-m-title">BMW X3.</h1>
+      <p class="hero-m-sub">Control en cada camino.</p>
+      <span class="hero-m-divider" aria-hidden="true"></span>
+      <p class="hero-m-tag">Diseñada para quienes lideran su propio trayecto.</p>
+    </div>
+    <div class="hero-m-actions" id="heroMActions">
+      <a class="btn btn-primary" href="#contacto">Agendar visita</a>
+      <a class="btn btn-ghost" href="#galeria">Ver galería</a>
+    </div>
+    <a class="hero-m-scroll" id="heroMScroll" href="#diseno" aria-label="Ver el diseño">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
+    </a>
   </div>
   <div class="hero-bg" role="img" aria-label="BMW X3 xDrive30i blanca parqueada frente a un jardín vertical en Bogotá"></div>
   <nav class="hero-dots" aria-label="Ir a sección">
@@ -1527,6 +1648,13 @@
   const mobileCta = document.getElementById("mobileCta");
   const docEl = document.documentElement;
 
+  // Hero mobile: capas con parallax controladas por scroll
+  const heroMPhoto = document.getElementById("heroMPhoto");
+  const heroMHead = document.getElementById("heroMHead");
+  const heroMActions = document.getElementById("heroMActions");
+  const heroMScroll = document.getElementById("heroMScroll");
+  const mqMobileHero = window.matchMedia("(max-width: 760px)");
+
   // Menú mobile: overlay a pantalla completa con revelado circular
   const menuToggle = document.getElementById("menuToggle");
   const mobileNav = document.getElementById("mobileNav");
@@ -1567,8 +1695,18 @@
       progress.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
 
       if (!reduceMotion && y < vh) {
-        heroContent.style.transform = "translateY(" + y * 0.18 + "px)";
-        heroContent.style.opacity = Math.max(0, 1 - y / (vh * 0.75));
+        if (mqMobileHero.matches) {
+          // La foto se queda "atrás" (parallax profundo), el texto sube y se funde
+          heroMPhoto.style.transform = "translate(-50%, -50%) translateY(" + y * 0.38 + "px)";
+          heroMHead.style.transform = "translateY(" + y * -0.12 + "px)";
+          heroMHead.style.opacity = Math.max(0, 1 - y / (vh * 0.5));
+          heroMActions.style.transform = "translateY(" + y * 0.08 + "px)";
+          heroMActions.style.opacity = Math.max(0, 1 - y / (vh * 0.45));
+          heroMScroll.style.opacity = Math.max(0, 1 - y / (vh * 0.2));
+        } else {
+          heroContent.style.transform = "translateY(" + y * 0.18 + "px)";
+          heroContent.style.opacity = Math.max(0, 1 - y / (vh * 0.75));
+        }
       }
 
       if (!reduceMotion) {
